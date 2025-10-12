@@ -1,0 +1,36 @@
+# SQLite Database
+*.sqlite
+*.sqlite3
+*.db
+
+# PHP
+*.log
+
+# Uploaded files (optional - uncomment if you don't want to track uploads)
+# assets/img/categories/*
+# assets/img/games/*
+# !assets/img/categories/.gitkeep
+# !assets/img/games/.gitkeep
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE Files
+.vscode/
+.idea/
+*.sublime-*
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Node modules (if any)
+node_modules/
+
+# Composer (if any)
+vendor/

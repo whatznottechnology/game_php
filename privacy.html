@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Read our privacy policy to understand how GameHub collects, uses, and protects your personal information and data.">
+    <meta name="keywords" content="privacy policy, data protection, personal information, GameHub privacy, user data">
+    <meta name="author" content="Game Platform">
+    <title>Privacy Policy - GameHub</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary-blue': '#3B82F6',
+                        'primary-purple': '#8B5CF6',
+                        'accent-neon': '#00D4FF',
+                        'accent-pink': '#EC4899',
+                        'dark-bg': '#0F172A',
+                        'card-bg': '#1E293B',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-poppins">
+    
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar-glass fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold gradient-text">
+                        <i class="fas fa-gamepad mr-2"></i>GameHub
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-white hover:text-blue-400 transition-colors">Home</a>
+                    <a href="search.html" class="text-white hover:text-blue-400 transition-colors">Search</a>
+                    <a href="index.html#categories" class="text-white hover:text-blue-400 transition-colors">Categories</a>
+                    <a href="index.html#contact" class="text-white hover:text-blue-400 transition-colors">Contact</a>
+                    <a href="terms.html" class="text-white hover:text-blue-400 transition-colors">T&C</a>
+                </div>
+
+                <!-- Enquiry Button -->
+                <div class="hidden md:block">
+                    <button onclick="openModal()" class="btn-primary px-6 py-2 rounded-lg font-semibold text-white">
+                        <i class="fas fa-envelope mr-2"></i>Enquiry
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobileMenuBtn" class="text-white focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden hidden bg-slate-800 rounded-lg mt-2 p-4">
+                <a href="index.html" class="block py-2 text-white hover:text-blue-400">Home</a>
+                <a href="search.html" class="block py-2 text-white hover:text-blue-400">Search</a>
+                <a href="index.html#categories" class="block py-2 text-white hover:text-blue-400">Categories</a>
+                <a href="index.html#contact" class="block py-2 text-white hover:text-blue-400">Contact</a>
+                <a href="terms.html" class="block py-2 text-white hover:text-blue-400">T&C</a>
+                <button onclick="openModal()" class="btn-primary w-full mt-3 px-4 py-2 rounded-lg font-semibold text-white">
+                    <i class="fas fa-envelope mr-2"></i>Enquiry
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Privacy Header Section -->
+    <section class="pt-24 pb-12 bg-gradient-to-b from-slate-900 to-slate-800">
+        <div class="container mx-auto px-4">
+            <!-- Breadcrumb -->
+            <div class="mb-6" data-aos="fade-up">
+                <nav class="flex items-center space-x-2 text-gray-400">
+                    <a href="index.html" class="hover:text-blue-400 transition-colors">
+                        <i class="fas fa-home mr-1"></i>Home
+                    </a>
+                    <i class="fas fa-chevron-right text-sm"></i>
+                    <span class="text-blue-400">Privacy Policy</span>
+                </nav>
+            </div>
+
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold gradient-text mb-4" data-aos="fade-up">
+                    Privacy Policy
+                </h1>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                    Your privacy is important to us. Learn how we collect, use, and protect your information
+                </p>
+                <div class="mt-6" data-aos="fade-up" data-aos-delay="400">
+                    <p class="text-gray-400">
+                        <i class="fas fa-calendar-alt mr-2"></i>
+                        Last updated: October 12, 2025
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Content Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="legal-content" data-aos="fade-up">
+                    
+                    <!-- Introduction -->
+                    <div class="mb-8">
+                        <h1 class="text-3xl font-bold mb-4">Our Commitment to Privacy</h1>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            At GameHub, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our services. Please read this privacy policy carefully.
+                        </p>
+                        <p class="text-gray-300 leading-relaxed">
+                            If you do not agree with the terms of this privacy policy, please do not access the site or use our services.
+                        </p>
+                    </div>
+
+                    <!-- Information We Collect -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">1. Information We Collect</h2>
+                        
+                        <h3 class="text-xl font-semibold text-blue-400 mb-3">Personal Data</h3>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Personally identifiable information, such as your name, shipping address, email address, and telephone number, and demographic information, such as your age, gender, hometown, and interests, that you voluntarily give to us when you register with the Site or when you choose to participate in various activities related to the Site.
+                        </p>
+
+                        <h3 class="text-xl font-semibold text-blue-400 mb-3">Derivative Data</h3>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Information our servers automatically collect when you access the Site, such as your IP address, your browser type, your operating system, your access times, and the pages you have viewed directly before and after accessing the Site.
+                        </p>
+
+                        <h3 class="text-xl font-semibold text-blue-400 mb-3">Financial Data</h3>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Financial information, such as data related to your payment method (e.g., valid credit card number, card brand, expiration date) that we may collect when you purchase, order, return, exchange, or request information about our services from the Site.
+                        </p>
+
+                        <h3 class="text-xl font-semibold text-blue-400 mb-3">Mobile Device Data</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            Device information, such as your mobile device ID, model, and manufacturer, and information about the location of your device, if you access the Site from a mobile device.
+                        </p>
+                    </div>
+
+                    <!-- How We Use Information -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">2. How We Use Your Information</h2>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Having accurate information about you permits us to provide you with a smooth, efficient, and customized experience. Specifically, we may use information collected about you via the Site to:
+                        </p>
+                        <ul class="list-disc pl-6 text-gray-300 space-y-2">
+                            <li>Administer sweepstakes, promotions, and contests</li>
+                            <li>Assist law enforcement and respond to subpoenas</li>
+                            <li>Compile anonymous statistical data and analysis for use internally</li>
+                            <li>Create and manage your account</li>
+                            <li>Deliver targeted advertising, coupons, newsletters, and promotions</li>
+                            <li>Email you regarding your account or order</li>
+                            <li>Enable user-to-user communications</li>
+                            <li>Fulfill and manage purchases, orders, payments, and other transactions</li>
+                            <li>Generate a personal profile about you to make future visits more personalized</li>
+                            <li>Increase the efficiency and operation of the Site</li>
+                            <li>Monitor and analyze usage and trends to improve your experience</li>
+                            <li>Notify you of updates to the Site</li>
+                            <li>Offer new products, services, and/or recommendations</li>
+                            <li>Perform other business activities as needed</li>
+                            <li>Prevent fraudulent transactions, monitor against theft</li>
+                            <li>Process payments and refunds</li>
+                            <li>Request feedback and contact you about your use of the Site</li>
+                            <li>Resolve disputes and troubleshoot problems</li>
+                            <li>Respond to product and customer service requests</li>
+                            <li>Send you a newsletter</li>
+                            <li>Solicit support for the Site</li>
+                        </ul>
+                    </div>
+
+                    <!-- Disclosure of Information -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">3. Disclosure of Your Information</h2>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            We may share information we have collected about you in certain situations. Your information may be disclosed as follows:
+                        </p>
+
+                        <h3 class="text-xl font-semibold text-blue-400 mb-3">By Law or to Protect Rights</h3>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            If we believe the release of information about you is necessary to respond to legal process, to investigate or remedy potential violations of our policies, or to protect the rights, property, and safety of others, we may share your information as permitted or required by any applicable law, rule, or regulation.
+                        </p>
+
+                        <h3 class="text-xl font-semibold text-blue-400 mb-3">Business Transfers</h3>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            We may share or transfer your information in connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.
+                        </p>
+
+                        <h3 class="text-xl font-semibold text-blue-400 mb-3">Third-Party Service Providers</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            We may share your information with third parties that perform services for us or on our behalf, including payment processing, data analysis, email delivery, hosting services, customer service, and marketing assistance.
+                        </p>
+                    </div>
+
+                    <!-- Tracking Technologies -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">4. Tracking Technologies</h2>
+                        
+                        <h3 class="text-xl font-semibold text-blue-400 mb-3">Cookies and Web Beacons</h3>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            We may use cookies, web beacons, tracking pixels, and other tracking technologies on the Site to help customize the Site and improve your experience. When you access the Site, your personal information is not collected through the use of tracking technology.
+                        </p>
+
+                        <h3 class="text-xl font-semibold text-blue-400 mb-3">Internet-Based Advertising</h3>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Additionally, we may use third-party software to serve ads on the Site, implement email marketing campaigns, and manage other interactive marketing initiatives. This third-party software may use cookies or similar tracking technology.
+                        </p>
+
+                        <h3 class="text-xl font-semibold text-blue-400 mb-3">Website Analytics</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            We may also partner with selected third-party vendors to allow tracking technologies and remarketing services on the Site through the use of first party cookies and third-party cookies.
+                        </p>
+                    </div>
+
+                    <!-- Third-Party Websites -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">5. Third-Party Websites</h2>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            The Site may contain links to third-party websites and applications of interest, including advertisements and external services, that are not affiliated with us. Once you have used these links to leave the Site, any information you provide to these third parties is not covered by this Privacy Policy.
+                        </p>
+                        <p class="text-gray-300 leading-relaxed">
+                            We cannot guarantee the safety and privacy of data you provide to any third parties. Any data collected by third parties is not covered by this privacy policy. We are not responsible for the content or privacy and security practices and policies of any third parties.
+                        </p>
+                    </div>
+
+                    <!-- Security of Information -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">6. Security of Your Information</h2>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that despite our efforts, no security measures are perfect or impenetrable.
+                        </p>
+                        <p class="text-gray-300 leading-relaxed">
+                            Any information disclosed online is vulnerable to interception and misuse by unauthorized parties. Therefore, we cannot guarantee complete security if you provide personal information.
+                        </p>
+                    </div>
+
+                    <!-- Policy for Children -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">7. Policy for Children</h2>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            We do not knowingly solicit information from or market to children under the age of 13. If you become aware of any data we have collected from children under age 13, please contact us using the contact information provided below.
+                        </p>
+                    </div>
+
+                    <!-- Controls for Do-Not-Track Features -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">8. Controls for Do-Not-Track Features</h2>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Most web browsers and some mobile operating systems include a Do-Not-Track ("DNT") feature or setting you can activate to signal your privacy preference not to have data about your online browsing activities monitored and collected.
+                        </p>
+                        <p class="text-gray-300 leading-relaxed">
+                            No uniform technology standard for recognizing and implementing DNT signals has been finalized. As such, we do not currently respond to DNT browser signals or any other mechanism that automatically communicates your choice not to be tracked online.
+                        </p>
+                    </div>
+
+                    <!-- Options Regarding Your Information -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">9. Options Regarding Your Information</h2>
+                        
+                        <h3 class="text-xl font-semibold text-blue-400 mb-3">Account Information</h3>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            You may at any time review or change the information in your account or terminate your account by contacting us using the contact information provided below.
+                        </p>
+
+                        <h3 class="text-xl font-semibold text-blue-400 mb-3">Emails and Communications</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            If you no longer wish to receive correspondence, emails, or other communications from us, you may opt-out by contacting us using the contact information provided below or by following the unsubscribe instructions included in the communication.
+                        </p>
+                    </div>
+
+                    <!-- Changes to Privacy Policy -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">10. Changes to This Privacy Policy</h2>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            We may update this Privacy Policy from time to time in order to reflect, for example, changes to our practices or for other operational, legal, or regulatory reasons. We will notify you of any changes by posting the new Privacy Policy on this page.
+                        </p>
+                        <p class="text-gray-300 leading-relaxed">
+                            You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.
+                        </p>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">11. Contact Us</h2>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            If you have questions or comments about this Privacy Policy, please contact us at:
+                        </p>
+                        <div class="bg-slate-800 p-4 rounded-lg">
+                            <ul class="text-gray-300 space-y-2">
+                                <li><i class="fas fa-envelope text-blue-400 mr-3"></i>Email: privacy@gamehub.com</li>
+                                <li><i class="fas fa-phone text-blue-400 mr-3"></i>Phone: +1 (555) 123-4567</li>
+                                <li><i class="fas fa-map-marker-alt text-blue-400 mr-3"></i>Address: 123 Gaming Street, Tech City, TC 12345</li>
+                                <li><i class="fas fa-globe text-blue-400 mr-3"></i>Website: www.gamehub.com</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Data Usage Summary -->
+                    <div class="mb-8 bg-blue-900 bg-opacity-30 p-6 rounded-lg">
+                        <h2 class="text-2xl font-semibold mb-4">Data Usage Summary</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h3 class="text-lg font-semibold text-blue-400 mb-2">We Collect:</h3>
+                                <ul class="text-gray-300 space-y-1">
+                                    <li>• Account information</li>
+                                    <li>• Usage analytics</li>
+                                    <li>• Device information</li>
+                                    <li>• Communication data</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-blue-400 mb-2">We Use It For:</h3>
+                                <ul class="text-gray-300 space-y-1">
+                                    <li>• Service improvement</li>
+                                    <li>• Customer support</li>
+                                    <li>• Security measures</li>
+                                    <li>• Communication</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Related Links -->
+                    <div class="mt-12 pt-8 border-t border-gray-700">
+                        <h3 class="text-xl font-semibold text-white mb-4">Related Documents</h3>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="terms.html" class="btn-primary px-6 py-3 rounded-lg font-semibold text-white">
+                                <i class="fas fa-file-contract mr-2"></i>Terms & Conditions
+                            </a>
+                            <a href="index.html#contact" class="btn-secondary px-6 py-3 rounded-lg font-semibold text-white">
+                                <i class="fas fa-envelope mr-2"></i>Contact Us
+                            </a>
+                            <button onclick="openModal()" class="bg-slate-700 hover:bg-slate-600 px-6 py-3 rounded-lg font-semibold text-white transition-colors">
+                                <i class="fas fa-question-circle mr-2"></i>Privacy Questions
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Buttons -->
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/1234567890" target="_blank" class="whatsapp-float w-14 h-14 flex items-center justify-center text-white text-xl">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Floating Inquiry Button -->
+    <button onclick="openModal()" class="inquiry-float px-6 py-3 rounded-full text-white font-semibold">
+        <i class="fas fa-envelope mr-2"></i>Enquiry
+    </button>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTop" class="scroll-top w-12 h-12 rounded-full flex items-center justify-center text-white">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Inquiry Modal -->
+    <div id="modalOverlay" class="modal-overlay fixed inset-0 z-50 hidden">
+        <div id="inquiryModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+            <div class="modal-content max-w-md w-full rounded-xl p-6 relative">
+                <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+                
+                <h3 class="text-2xl font-bold gradient-text mb-6">
+                    <i class="fas fa-envelope mr-3"></i>Get In Touch
+                </h3>
+                
+                <form id="inquiryForm" class="space-y-4">
+                    <div>
+                        <label class="block text-gray-300 mb-2">Name *</label>
+                        <input type="text" name="name" required class="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-white focus:border-blue-400 focus:outline-none">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-300 mb-2">Email *</label>
+                        <input type="email" name="email" required class="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-white focus:border-blue-400 focus:outline-none">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-300 mb-2">Mobile</label>
+                        <input type="tel" name="mobile" class="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-white focus:border-blue-400 focus:outline-none">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-300 mb-2">Message *</label>
+                        <textarea id="inquiryMessage" name="message" required rows="4" class="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-white focus:border-blue-400 focus:outline-none resize-none" placeholder="Tell us how we can help you..."></textarea>
+                    </div>
+                    
+                    <div class="flex gap-3 pt-4">
+                        <button type="button" onclick="closeModal()" class="flex-1 px-6 py-3 rounded-lg border border-gray-600 text-gray-300 hover:bg-gray-700 transition-colors">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn-primary flex-1 px-6 py-3 rounded-lg font-semibold text-white">
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

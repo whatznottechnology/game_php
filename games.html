@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse All Games - GameHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 font-sans">
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="text-2xl font-bold text-blue-600">
+                    <i class="fas fa-gamepad mr-2"></i>GameHub
+                </a>
+                
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 transition-colors">Home</a>
+                    <a href="games.html" class="text-blue-600 font-semibold">All Games</a>
+                    <a href="index.html#contact" class="text-gray-700 hover:text-blue-600 transition-colors">Contact</a>
+                </div>
+                
+                <button onclick="openModal()" class="hidden md:block px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all">
+                    <i class="fas fa-envelope mr-2"></i>Get Started
+                </button>
+                
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden bg-white pb-4">
+                <a href="index.html" class="block py-2 text-gray-700 hover:text-blue-600">Home</a>
+                <a href="games.html" class="block py-2 text-blue-600 font-semibold">All Games</a>
+                <a href="index.html#contact" class="block py-2 text-gray-700 hover:text-blue-600">Contact</a>
+                <button onclick="openModal()" class="w-full mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold">
+                    <i class="fas fa-envelope mr-2"></i>Get Started
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="pt-20 pb-12">
+        <div class="container mx-auto px-4">
+            <!-- Page Header -->
+            <div class="mb-8 text-center">
+                <h1 class="text-4xl font-bold text-gray-900 mb-3">Browse All Betting Games</h1>
+                <p class="text-lg text-gray-600">Choose from <span id="gameCount" class="font-bold text-blue-600">0</span> available games across all platforms</p>
+            </div>
+            
+            <!-- Search & Filter Bar -->
+            <div class="mb-8 bg-white rounded-xl shadow-lg p-6">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex-1">
+                        <input type="text" 
+                               id="searchInput" 
+                               placeholder="Search games by name, category, platform..." 
+                               onkeyup="searchGames(this.value)"
+                               class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none">
+                    </div>
+                    <button onclick="searchGames(document.getElementById('searchInput').value)" 
+                            class="px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-search mr-2"></i>Search
+                    </button>
+                </div>
+                
+                <!-- Category Filter Chips -->
+                <div id="categoryFilters" class="mt-4 flex flex-wrap gap-2">
+                    <button onclick="filterGamesByCategory('all')" 
+                            data-category-btn="all"
+                            class="px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-semibold hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-th mr-1"></i>All Games
+                    </button>
+                    <!-- Categories will be loaded dynamically -->
+                </div>
+            </div>
+            
+            <!-- Games Grid -->
+            <div id="gamesContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Loading State -->
+                <div class="col-span-full text-center py-20">
+                    <i class="fas fa-spinner fa-spin text-6xl text-blue-600 mb-4"></i>
+                    <p class="text-xl text-gray-600">Loading games...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Inquiry Modal -->
+    <div id="inquiryModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="sticky top-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-t-2xl">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-2xl font-bold">
+                        <i class="fas fa-rocket mr-2"></i>Start Playing Today!
+                    </h3>
+                    <button onclick="closeModal()" class="text-white hover:text-gray-200 text-2xl">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <p class="mt-2 text-blue-100">Fill the form below and get your ID within 5 minutes ⚡</p>
+            </div>
+            
+            <div class="p-6">
+                <form id="inquiryForm" class="space-y-4">
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-semibold">Full Name *</label>
+                        <input type="text" name="name" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none" placeholder="Enter your full name">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-semibold">WhatsApp Number *</label>
+                        <input type="tel" name="mobile" required pattern="[0-9]{10}" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none" placeholder="10-digit mobile number">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-semibold">Email (Optional)</label>
+                        <input type="email" name="email" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none" placeholder="your@email.com">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-semibold">Preferred Platform *</label>
+                        <select name="platform" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none">
+                            <option value="">Select a platform</option>
+                            <option value="Reddy999">Reddy999.com</option>
+                            <option value="Reddy444">Reddy444.com</option>
+                            <option value="Tenexch">Tenexch.com</option>
+                            <option value="KingExch9">KingExch9.com</option>
+                            <option value="BetBhai9">BetBhai9.red</option>
+                            <option value="AKQ777">AKQ777.com</option>
+                            <option value="Any">Any Platform (You Decide)</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-semibold">Interested In *</label>
+                        <select name="interest" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none">
+                            <option value="">What do you want to play?</option>
+                            <option value="Cricket Betting">Cricket Betting</option>
+                            <option value="Football Betting">Football Betting</option>
+                            <option value="Live Casino">Live Casino</option>
+                            <option value="Teen Patti">Teen Patti</option>
+                            <option value="Horse Racing">Horse Racing</option>
+                            <option value="Poker">Poker</option>
+                            <option value="All Games">All Games</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-semibold">Initial Deposit Amount</label>
+                        <select name="deposit" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none">
+                            <option value="">Select amount</option>
+                            <option value="500-1000">₹500 - ₹1,000</option>
+                            <option value="1000-5000">₹1,000 - ₹5,000</option>
+                            <option value="5000-10000">₹5,000 - ₹10,000</option>
+                            <option value="10000+">₹10,000+</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-semibold">Message (Optional)</label>
+                        <textarea id="inquiryMessage" name="message" rows="3" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none resize-none" placeholder="Any questions?"></textarea>
+                    </div>
+                    
+                    <div class="flex gap-3 pt-4">
+                        <button type="button" onclick="closeModal()" class="flex-1 px-6 py-3 rounded-lg border-2 border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors font-semibold">
+                            Cancel
+                        </button>
+                        <button type="submit" class="flex-1 px-6 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg">
+                            <i class="fas fa-paper-plane mr-2"></i>Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script>
+        // Load category filter buttons
+        async function loadCategoryFilters() {
+            try {
+                const response = await fetch('admin/api/categories.php');
+                const result = await response.json();
+                
+                if (result.success && result.data.length > 0) {
+                    const container = document.getElementById('categoryFilters');
+                    const allButton = container.querySelector('[data-category-btn="all"]');
+                    
+                    const categoryButtons = result.data.map(cat => `
+                        <button onclick="filterGamesByCategory(${cat.id}, '${cat.name}')" 
+                                data-category-btn="${cat.id}"
+                                class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-semibold hover:bg-gray-300 transition-colors">
+                            ${cat.name}
+                        </button>
+                    `).join('');
+                    
+                    container.innerHTML = allButton.outerHTML + categoryButtons;
+                }
+            } catch (error) {
+                console.error('Failed to load category filters:', error);
+            }
+        }
+        
+        // Call on page load
+        loadCategoryFilters();
+        
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

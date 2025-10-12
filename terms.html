@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Read our terms and conditions for using GameHub platform. Learn about our policies, user guidelines, and legal requirements.">
+    <meta name="keywords" content="terms and conditions, legal, policies, user agreement, GameHub terms">
+    <meta name="author" content="Game Platform">
+    <title>Terms & Conditions - GameHub</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary-blue': '#3B82F6',
+                        'primary-purple': '#8B5CF6',
+                        'accent-neon': '#00D4FF',
+                        'accent-pink': '#EC4899',
+                        'dark-bg': '#0F172A',
+                        'card-bg': '#1E293B',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-poppins">
+    
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar-glass fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold gradient-text">
+                        <i class="fas fa-gamepad mr-2"></i>GameHub
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-white hover:text-blue-400 transition-colors">Home</a>
+                    <a href="search.html" class="text-white hover:text-blue-400 transition-colors">Search</a>
+                    <a href="index.html#categories" class="text-white hover:text-blue-400 transition-colors">Categories</a>
+                    <a href="index.html#contact" class="text-white hover:text-blue-400 transition-colors">Contact</a>
+                    <a href="terms.html" class="text-blue-400 font-semibold">T&C</a>
+                </div>
+
+                <!-- Enquiry Button -->
+                <div class="hidden md:block">
+                    <button onclick="openModal()" class="btn-primary px-6 py-2 rounded-lg font-semibold text-white">
+                        <i class="fas fa-envelope mr-2"></i>Enquiry
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobileMenuBtn" class="text-white focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden hidden bg-slate-800 rounded-lg mt-2 p-4">
+                <a href="index.html" class="block py-2 text-white hover:text-blue-400">Home</a>
+                <a href="search.html" class="block py-2 text-white hover:text-blue-400">Search</a>
+                <a href="index.html#categories" class="block py-2 text-white hover:text-blue-400">Categories</a>
+                <a href="index.html#contact" class="block py-2 text-white hover:text-blue-400">Contact</a>
+                <a href="terms.html" class="block py-2 text-blue-400 font-semibold">T&C</a>
+                <button onclick="openModal()" class="btn-primary w-full mt-3 px-4 py-2 rounded-lg font-semibold text-white">
+                    <i class="fas fa-envelope mr-2"></i>Enquiry
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Terms Header Section -->
+    <section class="pt-24 pb-12 bg-gradient-to-b from-slate-900 to-slate-800">
+        <div class="container mx-auto px-4">
+            <!-- Breadcrumb -->
+            <div class="mb-6" data-aos="fade-up">
+                <nav class="flex items-center space-x-2 text-gray-400">
+                    <a href="index.html" class="hover:text-blue-400 transition-colors">
+                        <i class="fas fa-home mr-1"></i>Home
+                    </a>
+                    <i class="fas fa-chevron-right text-sm"></i>
+                    <span class="text-blue-400">Terms & Conditions</span>
+                </nav>
+            </div>
+
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold gradient-text mb-4" data-aos="fade-up">
+                    Terms & Conditions
+                </h1>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                    Please read these terms and conditions carefully before using our platform
+                </p>
+                <div class="mt-6" data-aos="fade-up" data-aos-delay="400">
+                    <p class="text-gray-400">
+                        <i class="fas fa-calendar-alt mr-2"></i>
+                        Last updated: October 12, 2025
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terms Content Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="legal-content" data-aos="fade-up">
+                    
+                    <!-- Introduction -->
+                    <div class="mb-8">
+                        <h1 class="text-3xl font-bold mb-4">Welcome to GameHub</h1>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            These Terms and Conditions ("Terms", "Terms and Conditions") govern your relationship with GameHub platform (the "Service") operated by GameHub ("us", "we", or "our").
+                        </p>
+                        <p class="text-gray-300 leading-relaxed">
+                            Please read these Terms and Conditions carefully before using our Service. Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.
+                        </p>
+                    </div>
+
+                    <!-- Acceptance of Terms -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">1. Acceptance of Terms</h2>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            By accessing and using this website, you accept and agree to be bound by the terms and provision of this agreement. Additionally, when using this website's particular services, you shall be subject to any posted guidelines or rules applicable to such services.
+                        </p>
+                        <p class="text-gray-300 leading-relaxed">
+                            If you do not agree to abide by the above, please do not use this service.
+                        </p>
+                    </div>
+
+                    <!-- User Accounts -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">2. User Accounts</h2>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            When you create an account with us, you must provide information that is accurate, complete, and current at all times. You are responsible for safeguarding the password and for keeping your account information up to date.
+                        </p>
+                        <ul class="list-disc pl-6 text-gray-300 space-y-2">
+                            <li>You must be at least 13 years old to use our Service</li>
+                            <li>You are responsible for maintaining the confidentiality of your account</li>
+                            <li>You agree to accept responsibility for all activities under your account</li>
+                            <li>You must notify us immediately of any unauthorized use of your account</li>
+                        </ul>
+                    </div>
+
+                    <!-- Prohibited Uses -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">3. Prohibited Uses</h2>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            You may not use our Service:
+                        </p>
+                        <ul class="list-disc pl-6 text-gray-300 space-y-2">
+                            <li>For any unlawful purpose or to solicit others to perform unlawful acts</li>
+                            <li>To violate any international, federal, provincial, or state regulations, rules, laws, or local ordinances</li>
+                            <li>To infringe upon or violate our intellectual property rights or the intellectual property rights of others</li>
+                            <li>To harass, abuse, insult, harm, defame, slander, disparage, intimidate, or discriminate</li>
+                            <li>To submit false or misleading information</li>
+                            <li>To upload or transmit viruses or any other type of malicious code</li>
+                            <li>To collect or track the personal information of others</li>
+                            <li>To spam, phish, pharm, pretext, spider, crawl, or scrape</li>
+                        </ul>
+                    </div>
+
+                    <!-- Content and Conduct -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">4. Content and Conduct</h2>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Our Service allows you to post, link, store, share and otherwise make available certain information, text, graphics, videos, or other material. You are responsible for the content that you post to the Service, including its legality, reliability, and appropriateness.
+                        </p>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            By posting content to the Service, you grant us the right and license to use, modify, publicly perform, publicly display, reproduce, and distribute such content on and through the Service.
+                        </p>
+                        <p class="text-gray-300 leading-relaxed">
+                            You retain any and all of your rights to any content you submit, post or display on or through the Service and you are responsible for protecting those rights.
+                        </p>
+                    </div>
+
+                    <!-- Privacy Policy -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">5. Privacy Policy</h2>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Your privacy is important to us. Please review our Privacy Policy, which also governs your use of the Service, to understand our practices.
+                        </p>
+                        <p class="text-gray-300 leading-relaxed">
+                            Our Privacy Policy explains how we collect, use and protect your information when you use our Service. By using our Service, you agree to the collection and use of information in accordance with our Privacy Policy.
+                        </p>
+                    </div>
+
+                    <!-- Intellectual Property -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">6. Intellectual Property Rights</h2>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            The Service and its original content, features and functionality are and will remain the exclusive property of GameHub and its licensors. The Service is protected by copyright, trademark, and other laws of both the Country and foreign countries. Our trademarks and trade dress may not be used in connection with any product or service without our prior written consent.
+                        </p>
+                    </div>
+
+                    <!-- Termination -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">7. Termination</h2>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            We may terminate or suspend your account and bar access to the Service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever and without limitation, including but not limited to a breach of the Terms.
+                        </p>
+                        <p class="text-gray-300 leading-relaxed">
+                            If you wish to terminate your account, you may simply discontinue using the Service or contact us directly.
+                        </p>
+                    </div>
+
+                    <!-- Disclaimer -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">8. Disclaimer</h2>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            The information on this website is provided on an "as is" basis. To the fullest extent permitted by law, this Company:
+                        </p>
+                        <ul class="list-disc pl-6 text-gray-300 space-y-2">
+                            <li>Excludes all representations and warranties relating to this website and its contents</li>
+                            <li>Does not warrant that the functions contained in the website will be uninterrupted or error-free</li>
+                            <li>Does not warrant that defects will be corrected or that this website or the server is free of viruses or bugs</li>
+                            <li>Does not warrant the accuracy, reliability or completeness of any information</li>
+                        </ul>
+                    </div>
+
+                    <!-- Limitation of Liability -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">9. Limitation of Liability</h2>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            In no event shall GameHub, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your use of the Service.
+                        </p>
+                    </div>
+
+                    <!-- Governing Law -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">10. Governing Law</h2>
+                        <p class="text-gray-300 leading-relaxed">
+                            These Terms shall be interpreted and governed by the laws of the State, without regard to its conflict of law provisions. Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights.
+                        </p>
+                    </div>
+
+                    <!-- Changes to Terms -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">11. Changes to Terms</h2>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will try to provide at least 30 days notice prior to any new terms taking effect.
+                        </p>
+                        <p class="text-gray-300 leading-relaxed">
+                            What constitutes a material change will be determined at our sole discretion. By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms.
+                        </p>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-semibold mb-4">12. Contact Information</h2>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            If you have any questions about these Terms and Conditions, please contact us:
+                        </p>
+                        <div class="bg-slate-800 p-4 rounded-lg">
+                            <ul class="text-gray-300 space-y-2">
+                                <li><i class="fas fa-envelope text-blue-400 mr-3"></i>Email: legal@gamehub.com</li>
+                                <li><i class="fas fa-phone text-blue-400 mr-3"></i>Phone: +1 (555) 123-4567</li>
+                                <li><i class="fas fa-map-marker-alt text-blue-400 mr-3"></i>Address: 123 Gaming Street, Tech City, TC 12345</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Related Links -->
+                    <div class="mt-12 pt-8 border-t border-gray-700">
+                        <h3 class="text-xl font-semibold text-white mb-4">Related Documents</h3>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="privacy.html" class="btn-primary px-6 py-3 rounded-lg font-semibold text-white">
+                                <i class="fas fa-shield-alt mr-2"></i>Privacy Policy
+                            </a>
+                            <a href="index.html#contact" class="btn-secondary px-6 py-3 rounded-lg font-semibold text-white">
+                                <i class="fas fa-envelope mr-2"></i>Contact Us
+                            </a>
+                            <button onclick="openModal()" class="bg-slate-700 hover:bg-slate-600 px-6 py-3 rounded-lg font-semibold text-white transition-colors">
+                                <i class="fas fa-question-circle mr-2"></i>Ask Questions
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Buttons -->
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/1234567890" target="_blank" class="whatsapp-float w-14 h-14 flex items-center justify-center text-white text-xl">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Floating Inquiry Button -->
+    <button onclick="openModal()" class="inquiry-float px-6 py-3 rounded-full text-white font-semibold">
+        <i class="fas fa-envelope mr-2"></i>Enquiry
+    </button>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTop" class="scroll-top w-12 h-12 rounded-full flex items-center justify-center text-white">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Inquiry Modal -->
+    <div id="modalOverlay" class="modal-overlay fixed inset-0 z-50 hidden">
+        <div id="inquiryModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+            <div class="modal-content max-w-md w-full rounded-xl p-6 relative">
+                <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+                
+                <h3 class="text-2xl font-bold gradient-text mb-6">
+                    <i class="fas fa-envelope mr-3"></i>Get In Touch
+                </h3>
+                
+                <form id="inquiryForm" class="space-y-4">
+                    <div>
+                        <label class="block text-gray-300 mb-2">Name *</label>
+                        <input type="text" name="name" required class="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-white focus:border-blue-400 focus:outline-none">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-300 mb-2">Email *</label>
+                        <input type="email" name="email" required class="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-white focus:border-blue-400 focus:outline-none">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-300 mb-2">Mobile</label>
+                        <input type="tel" name="mobile" class="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-white focus:border-blue-400 focus:outline-none">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-300 mb-2">Message *</label>
+                        <textarea id="inquiryMessage" name="message" required rows="4" class="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-white focus:border-blue-400 focus:outline-none resize-none" placeholder="Tell us how we can help you..."></textarea>
+                    </div>
+                    
+                    <div class="flex gap-3 pt-4">
+                        <button type="button" onclick="closeModal()" class="flex-1 px-6 py-3 rounded-lg border border-gray-600 text-gray-300 hover:bg-gray-700 transition-colors">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn-primary flex-1 px-6 py-3 rounded-lg font-semibold text-white">
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
