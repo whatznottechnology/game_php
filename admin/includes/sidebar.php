@@ -31,6 +31,12 @@
                 ?>
             </a>
             
+            <!-- Banners -->
+            <a href="banners.php" class="flex items-center px-4 py-3 rounded-lg <?php echo basename($_SERVER['PHP_SELF']) === 'banners.php' ? 'bg-blue-600' : 'hover:bg-gray-800'; ?> transition-colors">
+                <i class="fas fa-images w-6"></i>
+                <span class="ml-3 font-semibold">Banners</span>
+            </a>
+            
             <!-- Inquiries -->
             <a href="inquiries.php" class="flex items-center px-4 py-3 rounded-lg <?php echo basename($_SERVER['PHP_SELF']) === 'inquiries.php' ? 'bg-blue-600' : 'hover:bg-gray-800'; ?> transition-colors">
                 <i class="fas fa-inbox w-6"></i>

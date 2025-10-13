@@ -397,23 +397,7 @@ function openGameInquiry(gameName, categoryName) {
     }, 100);
 }
 
-// Open modal
-function openModal() {
-    const modal = document.getElementById('inquiryModal');
-    if (modal) {
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-// Close modal
-function closeModal() {
-    const modal = document.getElementById('inquiryModal');
-    if (modal) {
-        modal.classList.add('hidden');
-        document.body.style.overflow = 'auto';
-    }
-}
+// Global form submission handler moved to main script.js
 
 // Handle inquiry form submission
 document.addEventListener('submit', async function(e) {

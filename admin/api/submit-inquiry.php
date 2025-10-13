@@ -22,7 +22,7 @@ try {
     $data = json_decode(file_get_contents('php://input'), true);
     
     // Validate required fields
-    $required = ['name', 'mobile', 'platform', 'interest'];
+    $required = ['name', 'mobile'];
     foreach ($required as $field) {
         if (empty($data[$field])) {
             throw new Exception("Field '$field' is required");
@@ -33,8 +33,8 @@ try {
     $name = trim($data['name']);
     $mobile = trim($data['mobile']);
     $email = isset($data['email']) ? trim($data['email']) : '';
-    $platform = trim($data['platform']);
-    $interest = trim($data['interest']);
+    $platform = isset($data['platform']) && !empty($data['platform']) ? trim($data['platform']) : 'Any Platform';
+    $interest = isset($data['interest']) && !empty($data['interest']) ? trim($data['interest']) : 'All Games';
     $deposit_amount = isset($data['deposit_amount']) ? trim($data['deposit_amount']) : '';
     $message = isset($data['message']) ? trim($data['message']) : '';
     $game_name = isset($data['game_name']) ? trim($data['game_name']) : '';

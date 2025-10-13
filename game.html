@@ -23,6 +23,24 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     
+    <style>
+        .animate-pulse-scale {
+            animation: pulseScale 0.3s ease-out;
+        }
+        
+        @keyframes pulseScale {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @media (max-width: 640px) {
+            #inquiryModal {
+                max-width: 95vw;
+                margin: 1rem;
+            }
+        }
+    </style>
+    
     <!-- Tailwind Config -->
     <script>
         tailwind.config = {
@@ -105,9 +123,9 @@
                         <i class="fas fa-home mr-1"></i>Home
                     </a>
                     <i class="fas fa-chevron-right text-sm"></i>
-                    <a href="index.html" class="hover:text-blue-600 transition-colors">Games</a>
+                    <a href="index.html#games" class="hover:text-blue-600 transition-colors">Games</a>
                     <i class="fas fa-chevron-right text-sm"></i>
-                    <span id="gameBreadcrumb" class="text-blue-600 font-medium">Space Adventure</span>
+                    <span id="gameBreadcrumb" class="text-blue-600 font-medium">Loading...</span>
                 </nav>
             </div>
 
@@ -444,110 +462,134 @@
     </button>
 
     <!-- Inquiry Modal -->
-    <div id="modalOverlay" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50">
-        <div id="inquiryModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
-            <div class="bg-white max-w-md w-full rounded-lg p-6 relative max-h-[90vh] overflow-y-auto">
-                <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-                
-                <div class="text-center mb-6">
-                    <div class="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-rocket text-3xl text-white"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Get Your FREE Betting ID</h3>
-                    <p class="text-gray-600">Fill the form below and we'll activate your account in 5 minutes!</p>
+    <div id="modalOverlay" class="fixed inset-0 z-50 hidden bg-black bg-opacity-60 flex items-center justify-center p-4">
+        <div id="inquiryModal" class="bg-white max-w-lg w-full rounded-2xl shadow-2xl relative animate-pulse-scale">
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors z-10">
+                <i class="fas fa-times text-sm"></i>
+            </button>
+            
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-t-2xl text-center">
+                <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-gamepad text-2xl"></i>
                 </div>
-                
-                <form id="inquiryForm" class="space-y-4">
-                    <div>
-                        <label class="block text-gray-700 mb-2 font-semibold">Full Name *</label>
-                        <input type="text" name="name" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none" placeholder="Enter your full name">
+                <h3 class="text-2xl font-bold mb-2">Get Your FREE Gaming ID</h3>
+                <p class="text-blue-100 text-sm">Instant activation • 5-10 minutes • 100% secure</p>
+            </div>
+            
+            <!-- Form Container -->
+            <div class="p-6">
+                <form id="inquiryForm" class="space-y-5">
+                    <!-- Name Field -->
+                    <div class="relative">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-user text-blue-500 mr-2"></i>Full Name *
+                        </label>
+                        <input type="text" name="name" required 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white" 
+                               placeholder="Enter your full name">
                     </div>
                     
-                    <div>
-                        <label class="block text-gray-700 mb-2 font-semibold">WhatsApp Number *</label>
-                        <input type="tel" name="mobile" required pattern="[0-9]{10}" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none" placeholder="10-digit mobile number">
-                        <p class="text-xs text-gray-500 mt-1">We'll send your ID details on WhatsApp</p>
+                    <!-- Phone Field -->
+                    <div class="relative">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fab fa-whatsapp text-green-500 mr-2"></i>WhatsApp Number *
+                        </label>
+                        <input type="tel" name="mobile" required pattern="[0-9]{10}" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white" 
+                               placeholder="10-digit mobile number">
+                        <p class="text-xs text-gray-500 mt-1 flex items-center">
+                            <i class="fas fa-info-circle mr-1"></i>We'll contact you on WhatsApp within 5 minutes
+                        </p>
                     </div>
                     
-                    <div>
-                        <label class="block text-gray-700 mb-2 font-semibold">Email Address</label>
-                        <input type="email" name="email" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none" placeholder="your@email.com (optional)">
+                    <!-- Email Field -->
+                    <div class="relative">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-envelope text-purple-500 mr-2"></i>Email Address
+                        </label>
+                        <input type="email" name="email" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white" 
+                               placeholder="your@email.com (optional)">
                     </div>
                     
-                    <div>
-                        <label class="block text-gray-700 mb-2 font-semibold">Preferred Platform *</label>
-                        <select name="platform" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none">
-                            <option value="">Select a platform</option>
-                            <option value="Reddy999">Reddy999.com</option>
-                            <option value="Reddy444">Reddy444.com</option>
-                            <option value="Tenexch">Tenexch.com</option>
-                            <option value="KingExch9">KingExch9.com</option>
-                            <option value="BetBhai9">BetBhai9.red</option>
-                            <option value="AKQ777">AKQ777.com</option>
-                            <option value="Any">Any Platform (You Decide)</option>
+                    <!-- Quick Platform Selection -->
+                    <div class="relative">
+                        <label class="block text-sm font-medium text-gray-700 mb-3">
+                            <i class="fas fa-star text-yellow-500 mr-2"></i>Choose Your Platform
+                        </label>
+                        <div class="grid grid-cols-2 gap-2 text-sm">
+                            <label class="flex items-center p-3 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+                                <input type="radio" name="platform" value="Reddy999" class="text-blue-600 mr-2">
+                                <span class="font-medium">Reddy999</span>
+                            </label>
+                            <label class="flex items-center p-3 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+                                <input type="radio" name="platform" value="KingExch9" class="text-blue-600 mr-2">
+                                <span class="font-medium">KingExch9</span>
+                            </label>
+                            <label class="flex items-center p-3 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+                                <input type="radio" name="platform" value="BetBhai9" class="text-blue-600 mr-2">
+                                <span class="font-medium">BetBhai9</span>
+                            </label>
+                            <label class="flex items-center p-3 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+                                <input type="radio" name="platform" value="Any" class="text-blue-600 mr-2">
+                                <span class="font-medium">Any Platform</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Interest Selection -->
+                    <div class="relative">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-gamepad text-red-500 mr-2"></i>Interest
+                        </label>
+                        <select name="interest" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white">
+                            <option value="All Games">All Games</option>
+                            <option value="Cricket Betting">Cricket Betting</option>
+                            <option value="Live Casino">Live Casino</option>
+                            <option value="Teen Patti">Teen Patti & Card Games</option>
+                            <option value="Sports Betting">Sports Betting</option>
                         </select>
                     </div>
                     
-                    <div>
-                        <label class="block text-gray-700 mb-2 font-semibold">Interested In *</label>
-                        <select name="interest" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none">
-                            <option value="">What do you want to play?</option>
-                            <option value="Cricket Betting">Cricket Betting (IPL, International)</option>
-                            <option value="Football Betting">Football Betting</option>
-                            <option value="Live Casino">Live Casino (Roulette, Blackjack)</option>
-                            <option value="Teen Patti">Teen Patti & Andar Bahar</option>
-                            <option value="Horse Racing">Horse Racing</option>
-                            <option value="Poker">Online Poker</option>
-                            <option value="Esports">Esports Betting</option>
-                            <option value="All">All Games</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-gray-700 mb-2 font-semibold">Initial Deposit Amount</label>
-                        <select name="deposit" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none">
-                            <option value="">Select deposit amount</option>
-                            <option value="500-1000">₹500 - ₹1,000</option>
-                            <option value="1000-5000">₹1,000 - ₹5,000</option>
-                            <option value="5000-10000">₹5,000 - ₹10,000</option>
-                            <option value="10000+">₹10,000+</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-gray-700 mb-2 font-semibold">Additional Message</label>
-                        <textarea id="inquiryMessage" name="message" rows="3" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none resize-none" placeholder="Any questions or special requirements? (optional)"></textarea>
-                    </div>
-                    
-                    <div class="bg-green-50 border-2 border-green-200 rounded-lg p-4">
+                    <!-- Benefits Section -->
+                    <div class="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-xl p-4 mt-6">
                         <div class="flex items-start">
-                            <i class="fas fa-check-circle text-green-600 text-xl mr-3 mt-1"></i>
-                            <div class="text-sm text-gray-700">
-                                <p class="font-semibold mb-1">You'll Get:</p>
-                                <ul class="space-y-1">
-                                    <li>✓ Instant ID activation (5-10 mins)</li>
-                                    <li>✓ Welcome bonus up to ₹10,000</li>
-                                    <li>✓ 24/7 WhatsApp support</li>
-                                    <li>✓ Secure deposit & withdrawal</li>
-                                </ul>
+                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                                <i class="fas fa-gift text-green-600 text-sm"></i>
+                            </div>
+                            <div class="text-sm">
+                                <p class="font-semibold text-gray-800 mb-2">🎉 What You Get:</p>
+                                <div class="grid grid-cols-1 gap-1 text-gray-700">
+                                    <p>✨ <strong>5-10 mins</strong> instant activation</p>
+                                    <p>💰 Welcome bonus up to <strong>₹10,000</strong></p>
+                                    <p>📱 24/7 WhatsApp support</p>
+                                    <p>🔒 100% secure platform</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="flex gap-3 pt-4">
-                        <button type="button" onclick="closeModal()" class="flex-1 px-6 py-3 rounded-lg border-2 border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors font-semibold">
+                    <!-- Action Buttons -->
+                    <div class="flex gap-3 pt-6">
+                        <button type="button" onclick="closeModal()" 
+                                class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-all duration-200 font-medium">
                             Cancel
                         </button>
-                        <button type="submit" class="flex-1 px-6 py-3 rounded-lg bg-blue-600 text-white font-bold hover:bg-blue-700 transition-colors shadow-lg">
-                            <i class="fas fa-paper-plane mr-2"></i>Submit
+                        <button type="submit" 
+                                class="flex-1 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-bold shadow-lg transform hover:scale-105">
+                            <i class="fas fa-rocket mr-2"></i>Get My ID Now!
                         </button>
                     </div>
                     
-                    <p class="text-xs text-center text-gray-500 mt-4">
-                        🔒 Your information is 100% secure and confidential
-                    </p>
+                    <!-- Security Note -->
+                    <div class="text-center mt-4">
+                        <p class="text-xs text-gray-500 flex items-center justify-center">
+                            <i class="fas fa-shield-alt text-green-500 mr-2"></i>
+                            Your information is 100% secure and confidential
+                        </p>
+                    </div>
                 </form>
             </div>
         </div>
@@ -563,140 +605,278 @@
             // Get game ID from URL parameters
             const urlParams = new URLSearchParams(window.location.search);
             const gameId = urlParams.get('id') || '1';
-            const gameName = urlParams.get('name') || 'Space Adventure';
+            const gameName = urlParams.get('name') || 'Game Details';
             
-            // Load game details
-            loadGameDetails(gameId, gameName);
+            // Load game details from API
+            loadGameDetailsFromAPI(gameId);
+            
+            // Handle inquiry form submission
+            const inquiryForm = document.getElementById('inquiryForm');
+            if (inquiryForm) {
+                inquiryForm.addEventListener('submit', handleInquiryFormSubmission);
+            }
         });
         
-        function loadGameDetails(gameId, gameName) {
-            // Sample game data (in a real app, this would come from an API)
-            const games = {
-                '1': {
-                    title: 'Sports Betting',
-                    image: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600&h=400&fit=crop',
-                    description: 'Start betting on Cricket, Football, Tennis and more with India\'s most trusted platforms. Get live odds, instant deposits, and fast withdrawals. Perfect for IPL betting, International cricket, Premier League football and all major sports events.',
-                    platforms: ['Reddy999.com', 'Tenexch.com', 'KingExch9.com'],
-                    bonus: '₹5,000',
-                    minDeposit: '₹500'
-                },
-                '2': {
-                    title: 'Live Casino',
-                    image: 'https://images.unsplash.com/photo-1596838132731-3301c3fd4317?w=600&h=400&fit=crop',
-                    description: 'Experience the thrill of Las Vegas from home! Play Live Roulette, Blackjack, Baccarat with real dealers. Premium slots with progressive jackpots. Best casino platforms with instant payouts and 24/7 gaming.',
-                    platforms: ['KingExch9.com', 'BetBhai9.red', 'Reddy999.com'],
-                    bonus: '₹10,000',
-                    minDeposit: '₹500'
-                },
-                '3': {
-                    title: 'Online Poker',
-                    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop',
-                    description: 'Join high-stakes Texas Hold\'em and Omaha poker tables. Participate in daily tournaments with massive prize pools. Play cash games or compete in sit-n-go tournaments. Professional poker platform with secure transactions.',
-                    platforms: ['AKQ777.com', 'Reddy444.com'],
-                    bonus: '₹15,000',
-                    minDeposit: '₹1,000'
-                },
-                '4': {
-                    title: 'Horse Racing & Virtual Sports',
-                    image: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=600&h=400&fit=crop',
-                    description: 'Bet on live horse racing events from around the world. Virtual sports available 24/7 including virtual horse racing, greyhound racing, and motorsports. Real-time odds and instant results.',
-                    platforms: ['Tenexch.com', 'KingExch9.com'],
-                    bonus: '₹7,000',
-                    minDeposit: '₹500'
-                },
-                '5': {
-                    title: 'Esports Betting',
-                    image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&h=400&fit=crop',
-                    description: 'Bet on CS:GO, Dota 2, League of Legends, Valorant and all major esports tournaments. Live streaming of matches, detailed statistics, and competitive odds. Perfect for esports enthusiasts and gamers.',
-                    platforms: ['BetBhai9.red', 'Reddy999.com'],
-                    bonus: '₹8,000',
-                    minDeposit: '₹500'
-                },
-                '6': {
-                    title: 'Teen Patti & Andar Bahar',
-                    image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=600&h=400&fit=crop',
-                    description: 'Play India\'s favorite card games! Live Teen Patti, Andar Bahar, and other classic Indian card games with real dealers. Join tables with players from across India. Low minimum bets and high maximum limits.',
-                    platforms: ['All Platforms Available'],
-                    bonus: '₹6,000',
-                    minDeposit: '₹500'
+        async function loadGameDetailsFromAPI(gameId) {
+            try {
+                // Show loading state
+                document.getElementById('gameTitle').textContent = 'Loading...';
+                
+                // Fetch game data from API
+                const response = await fetch(`admin/api/game.php?id=${gameId}`);
+                const data = await response.json();
+                
+                if (data.success && data.data) {
+                    updateGameDetails(data.data);
+                } else {
+                    showGameNotFound();
                 }
-            };
+            } catch (error) {
+                console.error('Error loading game:', error);
+                showGameNotFound();
+            }
+        }
+        
+        function updateGameDetails(game) {
+            // Update page title and meta
+            document.title = `${game.name} - GameHub`;
+            document.querySelector('meta[name="description"]').setAttribute('content', 
+                `Play ${game.name}. ${game.description ? game.description.substring(0, 150) + '...' : ''}`);
             
-            const game = games[gameId] || games['1'];
-            
-            // Update page content
-            document.title = `${game.title} - Get Your ID | GameHub`;
-            document.getElementById('gameBreadcrumb').textContent = game.title;
-            document.getElementById('gameTitle').textContent = game.title;
-            document.getElementById('gameDescription').textContent = game.description;
-            document.getElementById('gameMainImage').src = game.image;
-            document.getElementById('gameMainImage').alt = game.title;
-            
-            // Update platform badges
-            const platformBadges = document.getElementById('platformBadges');
-            if (platformBadges && game.platforms) {
-                const colors = ['blue', 'purple', 'orange', 'red', 'green'];
-                platformBadges.innerHTML = game.platforms.map((platform, index) => {
-                    const color = colors[index % colors.length];
-                    return `<span class="bg-white px-3 py-2 rounded-lg text-sm font-semibold text-${color}-600 border border-${color}-300">${platform}</span>`;
-                }).join('');
+            // Update breadcrumb with category
+            const breadcrumbElement = document.getElementById('gameBreadcrumb');
+            if (game.category_name) {
+                breadcrumbElement.innerHTML = `<a href="index.html#categories" class="hover:text-blue-600 transition-colors">${game.category_name}</a> <i class="fas fa-chevron-right text-sm mx-2"></i> <span class="text-blue-600 font-medium">${game.name}</span>`;
+            } else {
+                breadcrumbElement.textContent = game.name;
             }
             
+            // Update main game info
+            document.getElementById('gameTitle').textContent = game.name;
+            
+            // Update game image
+            const gameImage = document.getElementById('gameMainImage');
+            if (game.banner_image) {
+                gameImage.src = game.banner_image;
+                gameImage.alt = game.name;
+            } else {
+                gameImage.src = 'https://images.unsplash.com/photo-1614732414444-096e5f1122d5?w=600&h=400&fit=crop';
+                gameImage.alt = game.name;
+            }
+            
+            // Update description
+            const descriptionElement = document.getElementById('gameDescription');
+            if (descriptionElement) {
+                descriptionElement.innerHTML = game.description || 'No description available.';
+            }
+            
+            // Update platforms
+            updatePlatforms(game.platforms_array || []);
+            
             // Update bonus info
-            const bonusInfo = document.getElementById('bonusInfo');
-            if (bonusInfo && game.bonus) {
-                bonusInfo.innerHTML = `<strong>Get up to ${game.bonus}</strong> on your first deposit (Min deposit: ${game.minDeposit})`;
+            const bonusElement = document.getElementById('bonusInfo');
+            if (bonusElement && game.bonus_amount) {
+                bonusElement.innerHTML = `<strong>Get up to ${game.bonus_amount}</strong> welcome bonus`;
+            }
+            
+            // Update minimum deposit
+            const minDepositElement = document.getElementById('minDeposit');
+            if (minDepositElement && game.min_deposit) {
+                minDepositElement.textContent = `Minimum Deposit: ${game.min_deposit}`;
+            }
+            
+            // Update category badge if exists
+            const categoryElement = document.getElementById('gameCategory');
+            if (categoryElement && game.category_name) {
+                categoryElement.textContent = game.category_name;
             }
             
             // Load related games
-            loadRelatedGames(gameId);
+            loadRelatedGames(game.id);
         }
         
-        function loadRelatedGames(currentGameId) {
-            const allGames = [
-                { id: '1', title: 'Sports Betting', image: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&h=240&fit=crop', description: 'Cricket, Football, Tennis & More', bonus: '₹5,000', platforms: 'Reddy999, Tenexch' },
-                { id: '2', title: 'Live Casino', image: 'https://images.unsplash.com/photo-1596838132731-3301c3fd4317?w=400&h=240&fit=crop', description: 'Slots, Roulette, Blackjack', bonus: '₹10,000', platforms: 'KingExch9, BetBhai9' },
-                { id: '3', title: 'Online Poker', image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=240&fit=crop', description: 'Texas Hold\'em & Tournaments', bonus: '₹15,000', platforms: 'AKQ777, Reddy444' },
-                { id: '4', title: 'Horse Racing', image: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=400&h=240&fit=crop', description: 'Live & Virtual Racing', bonus: '₹7,000', platforms: 'Tenexch, KingExch9' },
-                { id: '5', title: 'Esports Betting', image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&h=240&fit=crop', description: 'CS:GO, Dota 2, LOL & More', bonus: '₹8,000', platforms: 'BetBhai9, Reddy999' },
-                { id: '6', title: 'Teen Patti', image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=240&fit=crop', description: 'Classic Indian Card Games', bonus: '₹6,000', platforms: 'All Platforms' }
-            ];
+        function updatePlatforms(platforms) {
+            const container = document.getElementById('platformBadges');
+            if (!container) return;
             
-            // Filter out current game and limit to 4 related games
-            const relatedGames = allGames.filter(game => game.id !== currentGameId).slice(0, 4);
+            container.innerHTML = '';
             
-            const relatedGamesContainer = document.getElementById('relatedGames');
-            
-            const gamesHtml = relatedGames.map((game, index) => `
-                <div class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer border-2 border-gray-200 hover:border-blue-400" onclick="window.location.href='game.html?id=${game.id}&name=${encodeURIComponent(game.title)}'" data-aos="fade-up" data-aos-delay="${(index + 1) * 100}">
-                    <div class="relative overflow-hidden">
-                        <img src="${game.image}" alt="${game.title}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-3 right-3 bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-xs font-bold">
-                            🎁 Bonus ${game.bonus}
-                        </div>
-                    </div>
-                    <div class="p-5 bg-white">
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">${game.title}</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed mb-3">${game.description}</p>
-                        <div class="mb-4 pb-4 border-b border-gray-200">
-                            <div class="flex items-center text-xs text-gray-600">
-                                <i class="fas fa-server text-blue-500 mr-2"></i>
-                                <span>${game.platforms}</span>
-                            </div>
-                        </div>
-                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl text-sm font-bold transition-colors duration-200" onclick="event.stopPropagation(); openModal('${game.title}')">
-                            <i class="fas fa-rocket mr-2"></i>Get ID Now - FREE
-                        </button>
-                    </div>
-                </div>
-            `).join('');
-            
-            relatedGamesContainer.innerHTML = gamesHtml;
-            
-            // Reinitialize AOS for new elements
-            if (typeof AOS !== 'undefined') {
-                AOS.refresh();
+            if (platforms.length === 0) {
+                container.innerHTML = '<span class="text-gray-500">No platforms specified</span>';
+                return;
             }
+            
+            const colors = ['blue', 'purple', 'green', 'orange', 'red', 'teal'];
+            
+            platforms.forEach((platform, index) => {
+                const color = colors[index % colors.length];
+                const badge = document.createElement('span');
+                badge.className = `bg-white px-3 py-2 rounded-lg text-sm font-semibold text-${color}-600 border border-${color}-300`;
+                badge.textContent = platform;
+                container.appendChild(badge);
+            });
+        }
+        
+        function showGameNotFound() {
+            document.getElementById('gameTitle').textContent = 'Game Not Found';
+            const descriptionElement = document.getElementById('gameDescription');
+            if (descriptionElement) {
+                descriptionElement.innerHTML = '<div class="text-center py-8"><i class="fas fa-exclamation-triangle text-4xl text-red-500 mb-4"></i><p class="text-gray-600">Sorry, the requested game could not be found.</p><a href="index.html" class="text-blue-600 hover:underline mt-2 inline-block">← Back to Games</a></div>';
+            }
+            
+            // Hide platform badges and bonus info when game not found
+            const platformBadges = document.getElementById('platformBadges');
+            if (platformBadges) platformBadges.innerHTML = '';
+            
+            const bonusInfo = document.getElementById('bonusInfo');
+            if (bonusInfo) bonusInfo.innerHTML = '';
+        }
+        
+        async function loadRelatedGames(currentGameId) {
+            try {
+                // Fetch all games from API
+                const response = await fetch('admin/api/games.php');
+                const data = await response.json();
+                
+                if (data.success && data.data) {
+                    // Filter out current game and get random 4 games
+                    const allGames = data.data.filter(game => game.id != currentGameId);
+                    const relatedGames = allGames.slice(0, 4);
+                    
+                    const relatedGamesContainer = document.getElementById('relatedGames');
+                    
+                    if (relatedGames.length === 0) {
+                        relatedGamesContainer.innerHTML = '<p class="text-center text-gray-500 col-span-4">No related games available.</p>';
+                        return;
+                    }
+                    
+                    const gamesHtml = relatedGames.map((game, index) => {
+                        const platformsText = game.platforms_array && game.platforms_array.length > 0 
+                            ? game.platforms_array.slice(0, 2).join(', ') + (game.platforms_array.length > 2 ? ', +more' : '')
+                            : 'Multiple Platforms';
+                            
+                        const gameImage = game.banner_image || 'https://images.unsplash.com/photo-1614732414444-096e5f1122d5?w=400&h=240&fit=crop';
+                        const shortDesc = game.description ? game.description.replace(/<[^>]*>/g, '').substring(0, 60) + '...' : 'Exciting gaming experience awaits!';
+                        
+                        return `
+                            <div class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer border-2 border-gray-200 hover:border-blue-400" onclick="window.location.href='game.html?id=${game.id}&name=${encodeURIComponent(game.name)}'" data-aos="fade-up" data-aos-delay="${(index + 1) * 100}">
+                                <div class="relative overflow-hidden">
+                                    <img src="${gameImage}" alt="${game.name}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+                                    <div class="absolute top-3 right-3 bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-xs font-bold">
+                                        🎁 Bonus ${game.bonus_amount || '₹5,000'}
+                                    </div>
+                                </div>
+                                <div class="p-5 bg-white">
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2">${game.name}</h3>
+                                    <p class="text-gray-600 text-sm leading-relaxed mb-3">${shortDesc}</p>
+                                    <div class="mb-4 pb-4 border-b border-gray-200">
+                                        <div class="flex items-center text-xs text-gray-600">
+                                            <i class="fas fa-server text-blue-500 mr-2"></i>
+                                            <span>${platformsText}</span>
+                                        </div>
+                                    </div>
+                                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl text-sm font-bold transition-colors duration-200" onclick="event.stopPropagation(); openModal('${game.name}')">
+                                        <i class="fas fa-rocket mr-2"></i>Get ID Now - FREE
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                    
+                    relatedGamesContainer.innerHTML = gamesHtml;
+                    
+                    // Reinitialize AOS for new elements
+                    if (typeof AOS !== 'undefined') {
+                        AOS.refresh();
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading related games:', error);
+                const relatedGamesContainer = document.getElementById('relatedGames');
+                relatedGamesContainer.innerHTML = '<p class="text-center text-gray-500 col-span-4">Unable to load related games.</p>';
+            }
+        }
+        
+        // Handle inquiry form submission
+        async function handleInquiryFormSubmission(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const submitButton = event.target.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.innerHTML;
+            
+            // Show loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Submitting...';
+            
+            try {
+                const data = {
+                    name: formData.get('name'),
+                    mobile: formData.get('mobile'),
+                    email: formData.get('email'),
+                    platform: formData.get('platform'),
+                    interest: formData.get('interest'),
+                    deposit_amount: formData.get('deposit'),
+                    message: formData.get('message'),
+                    game_name: document.getElementById('gameTitle').textContent
+                };
+                
+                const response = await fetch('admin/api/submit-inquiry.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Show success message
+                    showSuccessMessage();
+                    event.target.reset();
+                } else {
+                    throw new Error(result.message || result.error || 'Failed to submit inquiry');
+                }
+                
+            } catch (error) {
+                console.error('Error submitting inquiry:', error);
+                showErrorMessage(error.message);
+            } finally {
+                // Restore button state
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalButtonText;
+            }
+        }
+        
+        function showSuccessMessage() {
+            const modal = document.getElementById('inquiryModal');
+            const modalContent = modal.querySelector('.bg-white');
+            
+            modalContent.innerHTML = `
+                <div class="text-center py-8">
+                    <div class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-check text-4xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Request Submitted Successfully!</h3>
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                        <p class="text-green-800 font-semibold mb-2">✅ Your betting ID request has been received</p>
+                        <p class="text-green-700 text-sm">Our team will contact you on WhatsApp within <strong>5-10 minutes</strong> with your ID details and welcome bonus information.</p>
+                    </div>
+                    <div class="space-y-2 text-sm text-gray-600 mb-6">
+                        <p><i class="fas fa-whatsapp text-green-500 mr-2"></i>Check your WhatsApp for updates</p>
+                        <p><i class="fas fa-gift text-blue-500 mr-2"></i>Get welcome bonus up to ₹10,000</p>
+                        <p><i class="fas fa-headset text-purple-500 mr-2"></i>24/7 support available</p>
+                    </div>
+                    <button onclick="closeModal()" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-bold transition-colors">
+                        <i class="fas fa-thumbs-up mr-2"></i>Great! Close
+                    </button>
+                </div>
+            `;
+        }
+        
+        function showErrorMessage(message) {
+            alert('Error: ' + message + '\n\nPlease try again or contact us directly via WhatsApp.');
         }
     </script>
     <script src="assets/js/api.js"></script>

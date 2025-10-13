@@ -25,7 +25,7 @@
                         <i class="fas fa-user text-white"></i>
                     </div>
                     <div class="mr-4">
-                        <p class="text-sm font-semibold text-gray-800"><?php echo htmlspecialchars($admin['username']); ?></p>
+                        <p class="text-sm font-semibold text-gray-800"><?php echo htmlspecialchars($_SESSION['admin_username'] ?? 'Admin'); ?></p>
                         <p class="text-xs text-gray-600">Administrator</p>
                     </div>
                 </div>

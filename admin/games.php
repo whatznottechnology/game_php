@@ -105,7 +105,6 @@ $admin = getAdminInfo();
     <title>Games - GameHub Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body class="bg-gray-100">
     <?php include 'includes/header.php'; ?>
@@ -344,9 +343,39 @@ $admin = getAdminInfo();
                     <!-- Description (Full Width) -->
                     <div>
                         <label class="block text-gray-700 font-semibold mb-2">Description (HTML Supported)</label>
-                        <textarea name="description" id="description" rows="8"
-                                  class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
-                                  placeholder="Enter game description with HTML formatting..."><?php echo htmlspecialchars($editGame['description'] ?? ''); ?></textarea>
+                        
+                        <!-- Formatting Toolbar -->
+                        <div class="mb-2 flex flex-wrap gap-2 p-3 bg-gray-50 border border-gray-300 rounded-t-lg">
+                            <button type="button" onclick="wrapText(document.getElementById('description'), '<p><strong>', '</strong></p>')" 
+                                    class="px-3 py-1 bg-white border border-gray-300 rounded hover:bg-gray-100 text-sm font-bold">
+                                <i class="fas fa-bold"></i> Bold
+                            </button>
+                            <button type="button" onclick="wrapText(document.getElementById('description'), '<p><em>', '</em></p>')" 
+                                    class="px-3 py-1 bg-white border border-gray-300 rounded hover:bg-gray-100 text-sm italic">
+                                <i class="fas fa-italic"></i> Italic
+                            </button>
+                            <button type="button" onclick="wrapText(document.getElementById('description'), '<ul><li>', '</li></ul>')" 
+                                    class="px-3 py-1 bg-white border border-gray-300 rounded hover:bg-gray-100 text-sm">
+                                <i class="fas fa-list-ul"></i> List
+                            </button>
+                            <button type="button" onclick="insertText(document.getElementById('description'), '<li></li>')" 
+                                    class="px-3 py-1 bg-white border border-gray-300 rounded hover:bg-gray-100 text-sm">
+                                <i class="fas fa-plus"></i> List Item
+                            </button>
+                            <button type="button" onclick="wrapText(document.getElementById('description'), '<p>', '</p>')" 
+                                    class="px-3 py-1 bg-white border border-gray-300 rounded hover:bg-gray-100 text-sm">
+                                <i class="fas fa-paragraph"></i> Paragraph
+                            </button>
+                        </div>
+                        
+                        <textarea name="description" id="description" rows="10"
+                                  class="w-full px-4 py-3 border-2 border-gray-300 rounded-b-lg focus:border-blue-500 focus:outline-none"
+                                  placeholder="Enter game description with HTML formatting... Use the buttons above to add formatting."><?php echo htmlspecialchars($editGame['description'] ?? ''); ?></textarea>
+                        
+                        <!-- HTML Help -->
+                        <div class="mt-2 text-sm text-gray-600">
+                            <p><strong>HTML Tips:</strong> Use &lt;p&gt;...&lt;/p&gt; for paragraphs, &lt;strong&gt;...&lt;/strong&gt; for bold text, &lt;ul&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ul&gt; for bullet lists</p>
+                        </div>
                     </div>
                     
                     <!-- Submit Buttons -->
@@ -367,15 +396,28 @@ $admin = getAdminInfo();
     </div>
     
     <script>
-        // Initialize TinyMCE for rich text editing
-        tinymce.init({
-            selector: '#description',
-            height: 300,
-            menubar: false,
-            plugins: 'lists link image code',
-            toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist | link image | code',
-            content_style: 'body { font-family: Arial, sans-serif; font-size: 14px; }'
-        });
+        // Simple formatting helper functions for textarea
+        function insertText(textarea, text) {
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const value = textarea.value;
+            
+            textarea.value = value.slice(0, start) + text + value.slice(end);
+            textarea.selectionStart = textarea.selectionEnd = start + text.length;
+            textarea.focus();
+        }
+        
+        function wrapText(textarea, before, after) {
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const selectedText = textarea.value.slice(start, end);
+            const replacement = before + selectedText + after;
+            
+            textarea.value = textarea.value.slice(0, start) + replacement + textarea.value.slice(end);
+            textarea.selectionStart = start + before.length;
+            textarea.selectionEnd = start + before.length + selectedText.length;
+            textarea.focus();
+        }
     </script>
 </body>
 </html>

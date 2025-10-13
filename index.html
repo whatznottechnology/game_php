@@ -23,6 +23,24 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     
+    <style>
+        .animate-pulse-scale {
+            animation: pulseScale 0.3s ease-out;
+        }
+        
+        @keyframes pulseScale {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @media (max-width: 640px) {
+            #inquiryModal {
+                max-width: 95vw;
+                margin: 1rem;
+            }
+        }
+    </style>
+    
     <!-- Tailwind Config -->
     <script>
         tailwind.config = {
@@ -99,73 +117,32 @@
     <section class="bg-white">
         <!-- Hero Slider -->
         <div class="relative w-full overflow-hidden" style="height: 500px;">
-                <div id="heroSlider" class="relative w-full h-full">
-                    <!-- Slide 1 -->
-                    <div class="hero-slide absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 flex items-center justify-center text-white opacity-100 transition-opacity duration-500">
-                        <div class="text-center px-4">
-                            <div class="bg-yellow-400 text-gray-900 inline-block px-4 py-2 rounded-full font-bold mb-4 animate-pulse">
-                                ⚡ INSTANT ID ACTIVATION - 24/7 Support
-                            </div>
-                            <h1 class="text-4xl md:text-6xl font-bold mb-4">Start Betting on Premium Platforms</h1>
-                            <p class="text-xl md:text-2xl mb-6">Get Your ID on Reddy999, Tenexch, KingExch & More | Minimum Deposit ₹500</p>
-                            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                                <button onclick="openModal()" class="bg-yellow-400 text-gray-900 px-10 py-4 rounded-lg font-bold text-lg hover:bg-yellow-300 transition-colors shadow-lg">
-                                    <i class="fas fa-rocket mr-2"></i>Get Your ID Now - FREE
-                                </button>
-                                <a href="https://wa.me/1234567890" class="bg-green-500 text-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-green-600 transition-colors shadow-lg">
-                                    <i class="fab fa-whatsapp mr-2"></i>WhatsApp Support
-                                </a>
-                            </div>
-                            <p class="text-sm mt-4 opacity-90">✓ 100% Secure | ✓ Instant Withdrawal | ✓ 500+ Active Users</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Slide 2 -->
-                    <div class="hero-slide absolute inset-0 bg-gradient-to-r from-purple-600 to-purple-700 flex items-center justify-center text-white opacity-0 transition-opacity duration-500">
-                        <div class="text-center px-4">
-                            <div class="bg-green-400 text-gray-900 inline-block px-4 py-2 rounded-full font-bold mb-4">
-                                🎁 WELCOME BONUS UP TO ₹10,000
-                            </div>
-                            <h1 class="text-4xl md:text-6xl font-bold mb-4">Top Betting Platforms in India</h1>
-                            <p class="text-xl md:text-2xl mb-6">Reddy999 | Tenexch | KingExch9 | BetBhai9 | AKQ777 - All Available</p>
-                            <button onclick="openModal()" class="bg-white text-purple-600 px-10 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors shadow-lg">
-                                <i class="fas fa-gift mr-2"></i>Claim Bonus - Register Now
-                            </button>
-                            <p class="text-sm mt-4 opacity-90">✓ Multiple Platforms | ✓ Live Casino | ✓ Sports Betting</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Slide 3 -->
-                    <div class="hero-slide absolute inset-0 bg-gradient-to-r from-green-600 to-green-700 flex items-center justify-center text-white opacity-0 transition-opacity duration-500">
-                        <div class="text-center px-4">
-                            <div class="bg-red-500 text-white inline-block px-4 py-2 rounded-full font-bold mb-4">
-                                🔥 LIMITED TIME OFFER - TODAY ONLY
-                            </div>
-                            <h1 class="text-4xl md:text-6xl font-bold mb-4">Win Lakhs Every Day!</h1>
-                            <p class="text-xl md:text-2xl mb-6">Join 1000+ Winners | Fast Payouts | Professional Support</p>
-                            <button onclick="openModal()" class="bg-white text-green-600 px-10 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors shadow-lg">
-                                <i class="fas fa-user-plus mr-2"></i>Start Winning Today
-                            </button>
-                            <p class="text-sm mt-4 opacity-90">✓ IPL Betting | ✓ Live Cricket | ✓ Football & More</p>
-                        </div>
-                    </div>
+            <!-- Loading state -->
+            <div id="sliderLoading" class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center text-white">
+                <div class="text-center">
+                    <i class="fas fa-spinner fa-spin text-4xl mb-4"></i>
+                    <p class="text-xl">Loading banners...</p>
                 </div>
-                
-                <!-- Slider Navigation -->
-                <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
-                    <button class="slider-dot w-3 h-3 rounded-full bg-white opacity-50 transition-opacity" onclick="currentSlide(1)"></button>
-                    <button class="slider-dot w-3 h-3 rounded-full bg-white opacity-100 transition-opacity" onclick="currentSlide(2)"></button>
-                    <button class="slider-dot w-3 h-3 rounded-full bg-white opacity-50 transition-opacity" onclick="currentSlide(3)"></button>
-                </div>
-                
-                <!-- Arrow Navigation -->
-                <button class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-3 rounded-full transition-all z-10" onclick="prevSlide()">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-3 rounded-full transition-all z-10" onclick="nextSlide()">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
             </div>
+            
+            <!-- Dynamic slider container -->
+            <div id="heroSlider" class="relative w-full h-full">
+                <!-- Banners will be loaded here dynamically -->
+            </div>
+            
+            <!-- Slider Navigation Dots -->
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10 slider-dots">
+                <!-- Dots will be generated dynamically -->
+            </div>
+            
+            <!-- Arrow Navigation -->
+            <button class="slider-prev absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-3 rounded-full transition-all z-10" onclick="prevSlide()">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-next absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-3 rounded-full transition-all z-10" onclick="nextSlide()">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
             
             <!-- Trusted Platforms Banner -->
             <div class="bg-gray-100 py-4 border-t border-b border-gray-200">
@@ -306,7 +283,7 @@
                                     </div>
                                 </div>
                                 
-                                <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3.5 rounded-xl text-sm font-bold transition-colors duration-200" onclick="event.stopPropagation(); openModal('contactModal');">
+                                <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3.5 rounded-xl text-sm font-bold transition-colors duration-200" onclick="event.stopPropagation(); openModal();">
                                     <i class="fas fa-rocket mr-2"></i>Get ID Now - FREE
                                 </button>
                             </div>
@@ -339,7 +316,7 @@
                                     </div>
                                 </div>
                                 
-                                <button class="w-full bg-purple-600 hover:bg-purple-700 text-white px-6 py-3.5 rounded-xl text-sm font-bold transition-colors duration-200" onclick="event.stopPropagation(); openModal('contactModal');">
+                                <button class="w-full bg-purple-600 hover:bg-purple-700 text-white px-6 py-3.5 rounded-xl text-sm font-bold transition-colors duration-200" onclick="event.stopPropagation(); openModal();">
                                     <i class="fas fa-rocket mr-2"></i>Get ID Now - FREE
                                 </button>
                             </div>
@@ -372,7 +349,7 @@
                                     </div>
                                 </div>
                                 
-                                <button class="w-full bg-red-600 hover:bg-red-700 text-white px-6 py-3.5 rounded-xl text-sm font-bold transition-colors duration-200" onclick="event.stopPropagation(); openModal('contactModal');">
+                                <button class="w-full bg-red-600 hover:bg-red-700 text-white px-6 py-3.5 rounded-xl text-sm font-bold transition-colors duration-200" onclick="event.stopPropagation(); openModal();">
                                     <i class="fas fa-rocket mr-2"></i>Get ID Now - FREE
                                 </button>
                             </div>
@@ -402,7 +379,7 @@
                                     </div>
                                 </div>
                                 
-                                <button class="w-full bg-orange-600 hover:bg-orange-700 text-white px-6 py-3.5 rounded-xl text-sm font-bold transition-colors duration-200" onclick="event.stopPropagation(); openModal('contactModal');">
+                                <button class="w-full bg-orange-600 hover:bg-orange-700 text-white px-6 py-3.5 rounded-xl text-sm font-bold transition-colors duration-200" onclick="event.stopPropagation(); openModal();">
                                     <i class="fas fa-rocket mr-2"></i>Get ID Now - FREE
                                 </button>
                             </div>
@@ -435,7 +412,7 @@
                                     </div>
                                 </div>
                                 
-                                <button class="w-full bg-pink-600 hover:bg-pink-700 text-white px-6 py-3.5 rounded-xl text-sm font-bold transition-colors duration-200" onclick="event.stopPropagation(); openModal('contactModal');">
+                                <button class="w-full bg-pink-600 hover:bg-pink-700 text-white px-6 py-3.5 rounded-xl text-sm font-bold transition-colors duration-200" onclick="event.stopPropagation(); openModal();">
                                     <i class="fas fa-rocket mr-2"></i>Get ID Now - FREE
                                 </button>
                             </div>
@@ -468,7 +445,7 @@
                                     </div>
                                 </div>
                                 
-                                <button class="w-full bg-teal-600 hover:bg-teal-700 text-white px-6 py-3.5 rounded-xl text-sm font-bold transition-colors duration-200" onclick="event.stopPropagation(); openModal('contactModal');">
+                                <button class="w-full bg-teal-600 hover:bg-teal-700 text-white px-6 py-3.5 rounded-xl text-sm font-bold transition-colors duration-200" onclick="event.stopPropagation(); openModal();">
                                     <i class="fas fa-rocket mr-2"></i>Get ID Now - FREE
                                 </button>
                             </div>
@@ -637,110 +614,132 @@
     </button>
 
     <!-- Inquiry Modal -->
-    <div id="modalOverlay" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50">
-        <div id="inquiryModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
-            <div class="bg-white max-w-md w-full rounded-lg p-6 relative max-h-[90vh] overflow-y-auto">
-                <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-                
-                <div class="text-center mb-6">
-                    <div class="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-rocket text-3xl text-white"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Get Your FREE Betting ID</h3>
-                    <p class="text-gray-600">Fill the form below and we'll activate your account in 5 minutes!</p>
+    <div id="modalOverlay" class="fixed inset-0 z-50 hidden bg-black bg-opacity-60 flex items-center justify-center p-4">
+        <div id="inquiryModal" class="bg-white max-w-lg w-full rounded-2xl shadow-2xl relative animate-pulse-scale">
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors z-10">
+                <i class="fas fa-times text-sm"></i>
+            </button>
+            
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-t-2xl text-center">
+                <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-gamepad text-2xl"></i>
                 </div>
-                
-                <form id="inquiryForm" class="space-y-4">
-                    <div>
-                        <label class="block text-gray-700 mb-2 font-semibold">Full Name *</label>
-                        <input type="text" name="name" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none" placeholder="Enter your full name">
+                <h3 class="text-2xl font-bold mb-2">Get Your FREE Gaming ID</h3>
+                <p class="text-blue-100 text-sm">Instant activation • 5-10 minutes • 100% secure</p>
+            </div>
+            
+                <form id="inquiryForm" class="space-y-5">
+                    <!-- Name Field -->
+                    <div class="relative">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-user text-blue-500 mr-2"></i>Full Name *
+                        </label>
+                        <input type="text" name="name" required 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white" 
+                               placeholder="Enter your full name">
                     </div>
                     
-                    <div>
-                        <label class="block text-gray-700 mb-2 font-semibold">WhatsApp Number *</label>
-                        <input type="tel" name="mobile" required pattern="[0-9]{10}" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none" placeholder="10-digit mobile number">
-                        <p class="text-xs text-gray-500 mt-1">We'll send your ID details on WhatsApp</p>
+                    <!-- Phone Field -->
+                    <div class="relative">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fab fa-whatsapp text-green-500 mr-2"></i>WhatsApp Number *
+                        </label>
+                        <input type="tel" name="mobile" required pattern="[0-9]{10}" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white" 
+                               placeholder="10-digit mobile number">
+                        <p class="text-xs text-gray-500 mt-1 flex items-center">
+                            <i class="fas fa-info-circle mr-1"></i>We'll contact you on WhatsApp within 5 minutes
+                        </p>
                     </div>
                     
-                    <div>
-                        <label class="block text-gray-700 mb-2 font-semibold">Email Address</label>
-                        <input type="email" name="email" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none" placeholder="your@email.com (optional)">
+                    <!-- Email Field -->
+                    <div class="relative">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-envelope text-purple-500 mr-2"></i>Email Address
+                        </label>
+                        <input type="email" name="email" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white" 
+                               placeholder="your@email.com (optional)">
                     </div>
                     
-                    <div>
-                        <label class="block text-gray-700 mb-2 font-semibold">Preferred Platform *</label>
-                        <select name="platform" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none">
-                            <option value="">Select a platform</option>
-                            <option value="Reddy999">Reddy999.com</option>
-                            <option value="Reddy444">Reddy444.com</option>
-                            <option value="Tenexch">Tenexch.com</option>
-                            <option value="KingExch9">KingExch9.com</option>
-                            <option value="BetBhai9">BetBhai9.red</option>
-                            <option value="AKQ777">AKQ777.com</option>
-                            <option value="Any">Any Platform (You Decide)</option>
+                    <!-- Quick Platform Selection -->
+                    <div class="relative">
+                        <label class="block text-sm font-medium text-gray-700 mb-3">
+                            <i class="fas fa-star text-yellow-500 mr-2"></i>Choose Your Platform
+                        </label>
+                        <div class="grid grid-cols-2 gap-2 text-sm">
+                            <label class="flex items-center p-3 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+                                <input type="radio" name="platform" value="Reddy999" class="text-blue-600 mr-2">
+                                <span class="font-medium">Reddy999</span>
+                            </label>
+                            <label class="flex items-center p-3 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+                                <input type="radio" name="platform" value="KingExch9" class="text-blue-600 mr-2">
+                                <span class="font-medium">KingExch9</span>
+                            </label>
+                            <label class="flex items-center p-3 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+                                <input type="radio" name="platform" value="BetBhai9" class="text-blue-600 mr-2">
+                                <span class="font-medium">BetBhai9</span>
+                            </label>
+                            <label class="flex items-center p-3 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+                                <input type="radio" name="platform" value="Any" class="text-blue-600 mr-2">
+                                <span class="font-medium">Any Platform</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Interest Selection -->
+                    <div class="relative">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-gamepad text-red-500 mr-2"></i>Interest
+                        </label>
+                        <select name="interest" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white">
+                            <option value="All Games">All Games</option>
+                            <option value="Cricket Betting">Cricket Betting</option>
+                            <option value="Live Casino">Live Casino</option>
+                            <option value="Teen Patti">Teen Patti & Card Games</option>
+                            <option value="Sports Betting">Sports Betting</option>
                         </select>
                     </div>
                     
-                    <div>
-                        <label class="block text-gray-700 mb-2 font-semibold">Interested In *</label>
-                        <select name="interest" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none">
-                            <option value="">What do you want to play?</option>
-                            <option value="Cricket Betting">Cricket Betting (IPL, International)</option>
-                            <option value="Football Betting">Football Betting</option>
-                            <option value="Live Casino">Live Casino (Roulette, Blackjack)</option>
-                            <option value="Teen Patti">Teen Patti & Andar Bahar</option>
-                            <option value="Horse Racing">Horse Racing</option>
-                            <option value="Poker">Online Poker</option>
-                            <option value="Esports">Esports Betting</option>
-                            <option value="All">All Games</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-gray-700 mb-2 font-semibold">Initial Deposit Amount</label>
-                        <select name="deposit" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none">
-                            <option value="">Select deposit amount</option>
-                            <option value="500-1000">₹500 - ₹1,000</option>
-                            <option value="1000-5000">₹1,000 - ₹5,000</option>
-                            <option value="5000-10000">₹5,000 - ₹10,000</option>
-                            <option value="10000+">₹10,000+</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-gray-700 mb-2 font-semibold">Additional Message</label>
-                        <textarea id="inquiryMessage" name="message" rows="3" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none resize-none" placeholder="Any questions or special requirements? (optional)"></textarea>
-                    </div>
-                    
-                    <div class="bg-green-50 border-2 border-green-200 rounded-lg p-4">
+                    <!-- Benefits Section -->
+                    <div class="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-xl p-4 mt-6">
                         <div class="flex items-start">
-                            <i class="fas fa-check-circle text-green-600 text-xl mr-3 mt-1"></i>
-                            <div class="text-sm text-gray-700">
-                                <p class="font-semibold mb-1">You'll Get:</p>
-                                <ul class="space-y-1">
-                                    <li>✓ Instant ID activation (5-10 mins)</li>
-                                    <li>✓ Welcome bonus up to ₹10,000</li>
-                                    <li>✓ 24/7 WhatsApp support</li>
-                                    <li>✓ Secure deposit & withdrawal</li>
-                                </ul>
+                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                                <i class="fas fa-gift text-green-600 text-sm"></i>
+                            </div>
+                            <div class="text-sm">
+                                <p class="font-semibold text-gray-800 mb-2">🎉 What You Get:</p>
+                                <div class="grid grid-cols-1 gap-1 text-gray-700">
+                                    <p>✨ <strong>5-10 mins</strong> instant activation</p>
+                                    <p>💰 Welcome bonus up to <strong>₹10,000</strong></p>
+                                    <p>📱 24/7 WhatsApp support</p>
+                                    <p>🔒 100% secure platform</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="flex gap-3 pt-4">
-                        <button type="button" onclick="closeModal()" class="flex-1 px-6 py-3 rounded-lg border-2 border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors font-semibold">
+                    <!-- Action Buttons -->
+                    <div class="flex gap-3 pt-6">
+                        <button type="button" onclick="closeModal()" 
+                                class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-all duration-200 font-medium">
                             Cancel
                         </button>
-                        <button type="submit" class="flex-1 px-6 py-3 rounded-lg bg-blue-600 text-white font-bold hover:bg-blue-700 transition-colors shadow-lg">
-                            <i class="fas fa-paper-plane mr-2"></i>Submit
+                        <button type="submit" 
+                                class="flex-1 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-bold shadow-lg transform hover:scale-105">
+                            <i class="fas fa-rocket mr-2"></i>Get My ID Now!
                         </button>
                     </div>
                     
-                    <p class="text-xs text-center text-gray-500 mt-4">
-                        🔒 Your information is 100% secure and confidential
-                    </p>
+                    <!-- Security Note -->
+                    <div class="text-center mt-4">
+                        <p class="text-xs text-gray-500 flex items-center justify-center">
+                            <i class="fas fa-shield-alt text-green-500 mr-2"></i>
+                            Your information is 100% secure and confidential
+                        </p>
+                    </div>
                 </form>
             </div>
         </div>
@@ -750,5 +749,97 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="assets/js/api.js"></script>
     <script src="assets/js/script.js"></script>
+    
+    <script>
+        // Handle inquiry form submission on home page
+        document.addEventListener('DOMContentLoaded', function() {
+            const inquiryForm = document.getElementById('inquiryForm');
+            if (inquiryForm) {
+                inquiryForm.addEventListener('submit', handleInquiryFormSubmission);
+            }
+        });
+        
+        // Handle inquiry form submission
+        async function handleInquiryFormSubmission(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const submitButton = event.target.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.innerHTML;
+            
+            // Show loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Submitting...';
+            
+            try {
+                const data = {
+                    name: formData.get('name'),
+                    mobile: formData.get('mobile'),
+                    email: formData.get('email'),
+                    platform: formData.get('platform'),
+                    interest: formData.get('interest'),
+                    deposit_amount: formData.get('deposit'),
+                    message: formData.get('message'),
+                    game_name: 'Home Page Inquiry'
+                };
+                
+                const response = await fetch('admin/api/submit-inquiry.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Show success message
+                    showSuccessMessage();
+                    event.target.reset();
+                } else {
+                    throw new Error(result.message || result.error || 'Failed to submit inquiry');
+                }
+                
+            } catch (error) {
+                console.error('Error submitting inquiry:', error);
+                showErrorMessage(error.message);
+            } finally {
+                // Restore button state
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalButtonText;
+            }
+        }
+        
+        function showSuccessMessage() {
+            const modal = document.getElementById('inquiryModal');
+            const modalContent = modal.querySelector('.bg-white');
+            
+            modalContent.innerHTML = `
+                <div class="text-center py-8">
+                    <div class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-check text-4xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Request Submitted Successfully!</h3>
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                        <p class="text-green-800 font-semibold mb-2">✅ Your betting ID request has been received</p>
+                        <p class="text-green-700 text-sm">Our team will contact you on WhatsApp within <strong>5-10 minutes</strong> with your ID details and welcome bonus information.</p>
+                    </div>
+                    <div class="space-y-2 text-sm text-gray-600 mb-6">
+                        <p><i class="fas fa-whatsapp text-green-500 mr-2"></i>Check your WhatsApp for updates</p>
+                        <p><i class="fas fa-gift text-blue-500 mr-2"></i>Get welcome bonus up to ₹10,000</p>
+                        <p><i class="fas fa-headset text-purple-500 mr-2"></i>24/7 support available</p>
+                    </div>
+                    <button onclick="closeModal()" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-bold transition-colors">
+                        <i class="fas fa-thumbs-up mr-2"></i>Great! Close
+                    </button>
+                </div>
+            `;
+        }
+        
+        function showErrorMessage(message) {
+            alert('Error: ' + message + '\n\nPlease try again or contact us directly via WhatsApp.');
+        }
+    </script>
 </body>
 </html>
