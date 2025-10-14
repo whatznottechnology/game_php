@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact us for any inquiries about gaming accounts, support, or questions. Get instant activation and 24/7 support.">
+    <meta name="keywords" content="contact us, gaming support, account activation, customer service">
+    <meta name="author" content="Game Platform">
+    <title>Contact Us - GameHub</title>
+    
+    <!-- Favicon -->
+    <link id="dynamic-favicon" rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <style>
+        .animate-pulse-scale {
+            animation: pulseScale 0.3s ease-out;
+        }
+        
+        @keyframes pulseScale {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Ensure contact form is visible */
+        #contactForm {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        .contact-form-container {
+            display: block !important;
+            visibility: visible !important;
+        }
+        
+        /* Contact form specific styles */
+        .contact-input {
+            display: block !important;
+            width: 100% !important;
+            color: #1f2937 !important; /* Dark gray text color */
+        }
+        
+        /* Fix input text color issues */
+        .contact-input::placeholder {
+            color: #9ca3af !important; /* Light gray placeholder */
+        }
+        
+        .contact-input:focus {
+            color: #1f2937 !important; /* Ensure text stays dark on focus */
+        }
+        
+        /* Select dropdown text color */
+        select.contact-input option {
+            color: #1f2937 !important;
+            background-color: white !important;
+        }
+        
+        /* Textarea text color */
+        textarea.contact-input {
+            color: #1f2937 !important;
+        }
+    </style>
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary-blue': '#3B82F6',
+                        'primary-purple': '#8B5CF6',
+                        'accent-neon': '#00D4FF',
+                        'accent-pink': '#EC4899',
+                        'dark-bg': '#0F172A',
+                        'card-bg': '#1E293B',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-poppins bg-white">
+    
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full top-0 z-50 bg-white border-b border-gray-200 transition-all duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="index.html" id="navbar-logo" class="text-2xl font-bold gradient-text flex items-center">
+                        <i class="fas fa-gamepad mr-2"></i><span id="site-name">GameHub</span>
+                    </a>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="platforms.html" class="text-gray-700 hover:text-blue-600 transition-colors font-semibold px-4 py-2 rounded-lg hover:bg-blue-50">
+                        <i class="fas fa-server mr-2"></i>Platforms
+                    </a>
+                    <span class="text-blue-600 font-bold px-4 py-2 rounded-lg bg-blue-50">
+                        <i class="fas fa-phone mr-2"></i>Contact Us
+                    </span>
+                    <button onclick="openModal()" class="btn-primary px-6 py-2 rounded-lg font-semibold text-white">
+                        <i class="fas fa-envelope mr-2"></i>Enquiry
+                    </button>
+                </div>
+
+                <!-- Mobile Buttons -->
+                <div class="md:hidden flex items-center space-x-2">
+                    <a href="platforms.html" class="text-gray-700 hover:text-blue-600 transition-colors p-2 rounded-lg hover:bg-blue-50">
+                        <i class="fas fa-server text-lg"></i>
+                    </a>
+                    <span class="text-blue-600 font-bold p-2 rounded-lg bg-blue-50">
+                        <i class="fas fa-phone text-lg"></i>
+                    </span>
+                    <button onclick="openModal()" class="btn-primary px-4 py-2 rounded-lg font-semibold text-white">
+                        <i class="fas fa-envelope mr-2"></i>Enquiry
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contact Header Section -->
+    <section class="pt-24 pb-12 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600">
+        <div class="container mx-auto px-4">
+            <div class="text-center text-white">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4" data-aos="fade-up">
+                    Contact Us
+                </h1>
+                <p class="text-xl text-blue-100 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                    Get in touch with us for gaming account activation, support, or any questions. We're here to help 24/7!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="bg-white rounded-2xl shadow-xl p-8 contact-form-container" data-aos="fade-right">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6">Send us a Message</h2>
+                    
+                    <form id="contactForm" class="space-y-6" style="display: block; visibility: visible;">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">
+                                    <i class="fas fa-user text-blue-600 mr-2"></i>Full Name *
+                                </label>
+                                <input type="text" name="name" required 
+                                       class="contact-input w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none transition-colors" 
+                                       placeholder="Enter your full name">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">
+                                    <i class="fas fa-envelope text-purple-600 mr-2"></i>Email Address *
+                                </label>
+                                <input type="email" name="email" required 
+                                       class="contact-input w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none transition-colors" 
+                                       placeholder="your@email.com">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fab fa-whatsapp text-green-600 mr-2"></i>WhatsApp Number *
+                            </label>
+                            <input type="tel" name="mobile" required pattern="[0-9]{10}" 
+                                   class="contact-input w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:outline-none transition-colors" 
+                                   placeholder="10-digit mobile number">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-tag text-orange-600 mr-2"></i>Subject *
+                            </label>
+                            <select name="subject" required 
+                                    class="contact-input w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none transition-colors">
+                                <option value="">Select Subject</option>
+                                <option value="Account Activation">Account Activation</option>
+                                <option value="Technical Support">Technical Support</option>
+                                <option value="Payment Issues">Payment Issues</option>
+                                <option value="General Inquiry">General Inquiry</option>
+                                <option value="Complaint">Complaint</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-message text-red-600 mr-2"></i>Message *
+                            </label>
+                            <textarea name="message" required rows="5" 
+                                      class="contact-input w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:outline-none transition-colors" 
+                                      placeholder="Tell us about your inquiry or issue..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white font-bold rounded-lg hover:shadow-2xl transition-all duration-200 transform hover:scale-105">
+                            <i class="fas fa-paper-plane mr-2"></i>Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Contact Information -->
+                <div class="space-y-8" data-aos="fade-left">
+                    <!-- Quick Contact -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Quick Contact</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-envelope text-blue-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-600 text-sm">Email us at</p>
+                                    <p id="contact-email" class="font-semibold text-gray-800">support@gamehub.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fab fa-whatsapp text-green-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-600 text-sm">WhatsApp us at</p>
+                                    <a id="contact-whatsapp-link" href="https://wa.me/1234567890" target="_blank" class="font-semibold text-gray-800 hover:text-green-600 transition-colors">
+                                        <span id="contact-whatsapp">+1234567890</span>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-phone text-purple-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-600 text-sm">Call us at</p>
+                                    <p id="contact-phone" class="font-semibold text-gray-800">+1 (555) 123-4567</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Features -->
+                    <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 border-2 border-blue-200">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Why Choose Us?</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-bolt text-blue-600 text-xl mr-3 mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Instant Activation</h4>
+                                    <p class="text-gray-600 text-sm">Get your gaming account ready in 5-10 minutes</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-headset text-green-600 text-xl mr-3 mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">24/7 Support</h4>
+                                    <p class="text-gray-600 text-sm">Round-the-clock customer service via WhatsApp & Call</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-shield-alt text-purple-600 text-xl mr-3 mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">100% Secure</h4>
+                                    <p class="text-gray-600 text-sm">Your information is safe and confidential with us</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-star text-yellow-600 text-xl mr-3 mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Trusted Platform</h4>
+                                    <p class="text-gray-600 text-sm">1000+ satisfied customers and growing</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Logo & Description -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-4" id="footer-logo">
+                        <i class="fas fa-gamepad text-3xl text-blue-400 mr-3"></i>
+                        <h3 class="text-2xl font-bold text-white" id="footer-site-name">GameHub</h3>
+                    </div>
+                    <p class="text-gray-400 mb-6 max-w-md">
+                        Your ultimate destination for discovering and playing amazing games. Join our community of gamers and explore endless adventures!
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-blue-400 text-2xl transition-colors">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400 text-2xl transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400 text-2xl transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400 text-2xl transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-blue-400 transition-colors">Home</a></li>
+                        <li><a href="contact.html" class="text-blue-400 font-semibold">Contact Us</a></li>
+                        <li><a href="terms.html" class="text-gray-400 hover:text-blue-400 transition-colors">Terms & Conditions</a></li>
+                        <li><a href="privacy.html" class="text-gray-400 hover:text-blue-400 transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Contact Info</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center text-gray-400">
+                            <i class="fas fa-envelope mr-3 text-blue-400"></i>
+                            <span id="footer-email">support@gamehub.com</span>
+                        </div>
+                        <div class="flex items-center text-gray-400">
+                            <i class="fas fa-phone mr-3 text-blue-400"></i>
+                            <span id="footer-phone">+1 (555) 123-4567</span>
+                        </div>
+                        <div class="flex items-center text-gray-400">
+                            <i class="fab fa-whatsapp mr-3 text-green-400"></i>
+                            <a id="footer-whatsapp-link" href="https://wa.me/1234567890" target="_blank" class="hover:text-green-400 transition-colors">
+                                <span id="footer-whatsapp">WhatsApp Support</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center">
+                <p class="text-gray-400">
+                    &copy; 2025 <span id="footer-copyright-name">GameHub</span>. All rights reserved. Built with ❤️ for gamers worldwide.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Buttons -->
+    <!-- WhatsApp Button -->
+    <a id="floating-whatsapp" href="https://wa.me/1234567890" target="_blank" class="fixed bottom-20 right-4 w-14 h-14 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center text-white text-xl shadow-lg transition-colors z-50">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Back to Top Button -->
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-4 right-4 bg-blue-500 hover:bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center text-white shadow-lg transition-colors z-50">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/script.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+        
+        // Handle contact form submission
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const submitButton = e.target.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.innerHTML;
+            
+            // Show loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
+            
+            try {
+                const data = {
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    mobile: formData.get('mobile'),
+                    subject: formData.get('subject'),
+                    message: formData.get('message'),
+                    page_source: 'Contact Us Page'
+                };
+                
+                const response = await fetch('admin/api/submit-inquiry.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Show success message
+                    showSuccessMessage();
+                    e.target.reset();
+                } else {
+                    throw new Error(result.message || result.error || 'Failed to submit inquiry');
+                }
+                
+            } catch (error) {
+                console.error('Error submitting inquiry:', error);
+                showErrorMessage(error.message);
+            } finally {
+                // Restore button state
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalButtonText;
+            }
+        });
+        
+        function showSuccessMessage() {
+            const form = document.getElementById('contactForm');
+            const formContainer = form.parentElement;
+            
+            formContainer.innerHTML = `
+                <div class="text-center py-8">
+                    <div class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-check text-4xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Message Sent Successfully!</h3>
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                        <p class="text-green-800 font-semibold mb-2">✅ Your message has been received</p>
+                        <p class="text-green-700 text-sm">Our team will contact you within <strong>24 hours</strong> to address your inquiry.</p>
+                    </div>
+                    <div class="space-y-2 text-sm text-gray-600 mb-6">
+                        <p><i class="fas fa-envelope text-blue-500 mr-2"></i>Check your email for updates</p>
+                        <p><i class="fas fa-whatsapp text-green-500 mr-2"></i>WhatsApp support available 24/7</p>
+                        <p><i class="fas fa-headset text-purple-500 mr-2"></i>Call us for urgent matters</p>
+                    </div>
+                    <a href="index.html" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-bold transition-colors">
+                        <i class="fas fa-home mr-2"></i>Back to Home
+                    </a>
+                </div>
+            `;
+        }
+        
+        function showErrorMessage(message) {
+            alert('Error: ' + message + '\n\nPlease try again or contact us directly via WhatsApp.');
+        }
+        
+        // Load site configuration on page load
+        async function loadSiteConfig() {
+            try {
+                const response = await fetch('admin/api/site-config.php');
+                const data = await response.json();
+                
+                if (data.success && data.data) {
+                    const config = data.data;
+                    
+                    // Update site name
+                    if (config.site_name) {
+                        document.getElementById('site-name').textContent = config.site_name;
+                        document.getElementById('footer-site-name').textContent = config.site_name;
+                        document.getElementById('footer-copyright-name').textContent = config.site_name;
+                        document.title = 'Contact Us - ' + config.site_name;
+                    }
+                    
+                    // Update favicon
+                    if (config.site_favicon) {
+                        document.getElementById('dynamic-favicon').href = config.site_favicon;
+                    }
+                    
+                    // Update logo if available
+                    if (config.site_logo) {
+                        const navbarLogo = document.getElementById('navbar-logo');
+                        const footerLogo = document.getElementById('footer-logo');
+                        
+                        // Replace icon with image in navbar
+                        navbarLogo.innerHTML = `<img src="${config.site_logo}" alt="${config.site_name}" class="h-8 mr-2"><span id="site-name">${config.site_name}</span>`;
+                        
+                        // Replace icon with image in footer
+                        footerLogo.innerHTML = `<img src="${config.site_logo}" alt="${config.site_name}" class="h-8 mr-3"><h3 class="text-2xl font-bold text-white" id="footer-site-name">${config.site_name}</h3>`;
+                    }
+                    
+                    // Update contact information
+                    if (config.support_email) {
+                        document.getElementById('contact-email').textContent = config.support_email;
+                        document.getElementById('footer-email').textContent = config.support_email;
+                    }
+                    
+                    if (config.contact_number) {
+                        document.getElementById('contact-phone').textContent = config.contact_number;
+                        document.getElementById('footer-phone').textContent = config.contact_number;
+                    }
+                    
+                    if (config.whatsapp_number) {
+                        const whatsappNumber = config.whatsapp_number;
+                        document.getElementById('contact-whatsapp').textContent = `+91${whatsappNumber}`;
+                        document.getElementById('footer-whatsapp').textContent = `+91${whatsappNumber}`;
+                        
+                        // Update WhatsApp links
+                        document.getElementById('contact-whatsapp-link').href = `https://wa.me/91${whatsappNumber}`;
+                        document.getElementById('footer-whatsapp-link').href = `https://wa.me/91${whatsappNumber}`;
+                        document.getElementById('floating-whatsapp').href = `https://wa.me/91${whatsappNumber}`;
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to load site configuration:', error);
+            }
+        }
+        
+        // Load configuration when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSiteConfig();
+        });
+    </script>
+</body>
+</html>

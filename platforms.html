@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover trusted gaming platforms with instant ID activation, secure transactions, and 24/7 support. Choose from top-rated betting and gaming sites.">
+    <meta name="keywords" content="gaming platforms, betting sites, trusted platforms, instant activation, secure gaming">
+    <meta name="author" content="Game Platform">
+    <title>Gaming Platforms - GameHub</title>
+    
+    <!-- Favicon -->
+    <link id="dynamic-favicon" rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <style>
+        .animate-pulse-scale {
+            animation: pulseScale 0.3s ease-out;
+        }
+        
+        @keyframes pulseScale {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .platform-card {
+            transition: all 0.3s ease;
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .platform-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 12px;
+            background: #f8fafc;
+            padding: 8px;
+        }
+        
+        @media (max-width: 640px) {
+            #inquiryModal {
+                max-width: 95vw;
+                margin: 0.5rem;
+            }
+            
+            #inquiryModal .p-8 {
+                padding: 1.5rem !important;
+            }
+            
+            #inquiryModal .p-6 {
+                padding: 1rem !important;
+            }
+            
+            #inquiryModal .text-3xl {
+                font-size: 1.5rem !important;
+            }
+            
+            #inquiryModal .w-20 {
+                width: 3.5rem !important;
+                height: 3.5rem !important;
+            }
+        }
+        
+        /* Fix modal input text colors */
+        #inquiryModal input,
+        #inquiryModal select,
+        #inquiryModal textarea {
+            color: #1f2937 !important; /* Dark gray text color */
+        }
+        
+        #inquiryModal input::placeholder,
+        #inquiryModal textarea::placeholder {
+            color: #9ca3af !important; /* Light gray placeholder */
+        }
+        
+        #inquiryModal select option {
+            color: #1f2937 !important;
+            background-color: white !important;
+        }
+    </style>
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary-blue': '#3B82F6',
+                        'primary-purple': '#8B5CF6',
+                        'accent-neon': '#00D4FF',
+                        'accent-pink': '#EC4899',
+                        'dark-bg': '#0F172A',
+                        'card-bg': '#1E293B',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-poppins bg-white">
+    
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full top-0 z-50 bg-white border-b border-gray-200 transition-all duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="index.html" id="navbar-logo" class="text-2xl font-bold gradient-text flex items-center">
+                        <i class="fas fa-gamepad mr-2"></i><span id="site-name">GameHub</span>
+                    </a>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <span class="text-blue-600 font-bold px-4 py-2 rounded-lg bg-blue-50">
+                        <i class="fas fa-server mr-2"></i>Platforms
+                    </span>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 transition-colors font-semibold px-4 py-2 rounded-lg hover:bg-blue-50">
+                        <i class="fas fa-phone mr-2"></i>Contact Us
+                    </a>
+                    <button onclick="openModal()" class="btn-primary px-6 py-2 rounded-lg font-semibold text-white">
+                        <i class="fas fa-envelope mr-2"></i>Enquiry
+                    </button>
+                </div>
+
+                <!-- Mobile Buttons -->
+                <div class="md:hidden flex items-center space-x-2">
+                    <span class="text-blue-600 font-bold p-2 rounded-lg bg-blue-50">
+                        <i class="fas fa-server text-lg"></i>
+                    </span>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 transition-colors p-2 rounded-lg hover:bg-blue-50">
+                        <i class="fas fa-phone text-lg"></i>
+                    </a>
+                    <button onclick="openModal()" class="btn-primary px-4 py-2 rounded-lg font-semibold text-white">
+                        <i class="fas fa-envelope mr-2"></i>Enquiry
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Platforms Header Section -->
+    <section class="pt-24 pb-12 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600">
+        <div class="container mx-auto px-4">
+            <div class="text-center text-white">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4" data-aos="fade-up">
+                    Gaming Platforms
+                </h1>
+                <p class="text-xl text-blue-100 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                    Discover trusted gaming platforms with instant ID activation, secure transactions, and 24/7 support. Choose from our carefully selected partners.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platforms Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-aos="fade-up">
+                    Trusted Gaming Platforms
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                    All platforms are verified, secure, and offer instant account activation with 24/7 customer support.
+                </p>
+            </div>
+
+            <!-- Loading State -->
+            <div id="platformsLoader" class="text-center py-12">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                <p class="text-gray-600">Loading trusted platforms...</p>
+            </div>
+
+            <!-- Platforms Grid -->
+            <div id="platformsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" style="display: none;">
+                <!-- Platforms will be loaded here -->
+            </div>
+
+            <!-- No Platforms Message -->
+            <div id="noPlatforms" class="text-center py-12" style="display: none;">
+                <div class="bg-white rounded-2xl p-12 shadow-lg border border-gray-200">
+                    <i class="fas fa-server text-6xl text-gray-400 mb-6"></i>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">No Platforms Available</h3>
+                    <p class="text-gray-600">We're working on adding amazing gaming platforms. Please check back soon!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-aos="fade-up">
+                        Why Choose Our Platforms?
+                    </h2>
+                    <p class="text-xl text-gray-600" data-aos="fade-up" data-aos-delay="200">
+                        All our partner platforms are carefully vetted for security, reliability, and user experience.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="text-center p-8 bg-blue-50 rounded-2xl border-2 border-blue-200" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-bolt text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Instant Activation</h3>
+                        <p class="text-gray-600">Get your gaming account ready in just 5-10 minutes with our instant activation service.</p>
+                    </div>
+                    
+                    <!-- Feature 2 -->
+                    <div class="text-center p-8 bg-green-50 rounded-2xl border-2 border-green-200" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-16 h-16 bg-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-shield-alt text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">100% Secure</h3>
+                        <p class="text-gray-600">All transactions are encrypted and your personal information is completely safe and confidential.</p>
+                    </div>
+                    
+                    <!-- Feature 3 -->
+                    <div class="text-center p-8 bg-purple-50 rounded-2xl border-2 border-purple-200" data-aos="fade-up" data-aos-delay="300">
+                        <div class="w-16 h-16 bg-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-headset text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">24/7 Support</h3>
+                        <p class="text-gray-600">Round-the-clock customer support via WhatsApp, call, and live chat for all your needs.</p>
+                    </div>
+                    
+                    <!-- Feature 4 -->
+                    <div class="text-center p-8 bg-orange-50 rounded-2xl border-2 border-orange-200" data-aos="fade-up" data-aos-delay="400">
+                        <div class="w-16 h-16 bg-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-coins text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Low Minimum Deposit</h3>
+                        <p class="text-gray-600">Start playing with just ₹500 minimum deposit on most platforms.</p>
+                    </div>
+                    
+                    <!-- Feature 5 -->
+                    <div class="text-center p-8 bg-red-50 rounded-2xl border-2 border-red-200" data-aos="fade-up" data-aos-delay="500">
+                        <div class="w-16 h-16 bg-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-rocket text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Fast Withdrawals</h3>
+                        <p class="text-gray-600">Get your winnings in just 10-15 minutes with our fast withdrawal processing.</p>
+                    </div>
+                    
+                    <!-- Feature 6 -->
+                    <div class="text-center p-8 bg-teal-50 rounded-2xl border-2 border-teal-200" data-aos="fade-up" data-aos-delay="600">
+                        <div class="w-16 h-16 bg-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-star text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Trusted by Thousands</h3>
+                        <p class="text-gray-600">Join over 1000+ satisfied customers who trust our platform selection.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gradient-to-r from-blue-600 to-purple-600">
+        <div class="container mx-auto px-4">
+            <div class="text-center text-white">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6" data-aos="fade-up">
+                    Ready to Start Playing?
+                </h2>
+                <p class="text-xl mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                    Get instant account activation on any of our trusted platforms. Contact us now for immediate assistance!
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4" data-aos="fade-up" data-aos-delay="400">
+                    <button onclick="openModal()" class="bg-white text-blue-600 px-8 py-4 rounded-xl text-lg font-bold hover:bg-gray-100 transition-colors shadow-lg">
+                        <i class="fas fa-play mr-2"></i>Get Started Now
+                    </button>
+                    <a href="contact.html" class="border-2 border-white text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-white hover:text-blue-600 transition-colors">
+                        <i class="fas fa-phone mr-2"></i>Contact Support
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Logo & Description -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-4" id="footer-logo">
+                        <i class="fas fa-gamepad text-3xl text-blue-400 mr-3"></i>
+                        <h3 class="text-2xl font-bold text-white" id="footer-site-name">GameHub</h3>
+                    </div>
+                    <p class="text-gray-400 mb-6 max-w-md">
+                        Your ultimate destination for discovering trusted gaming platforms with instant activation and 24/7 support.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-blue-400 text-2xl transition-colors">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400 text-2xl transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400 text-2xl transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400 text-2xl transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-blue-400 transition-colors">Home</a></li>
+                        <li><a href="platforms.html" class="text-blue-400 font-semibold">Platforms</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-blue-400 transition-colors">Contact Us</a></li>
+                        <li><a href="terms.html" class="text-gray-400 hover:text-blue-400 transition-colors">Terms & Conditions</a></li>
+                        <li><a href="privacy.html" class="text-gray-400 hover:text-blue-400 transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Contact Info</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-envelope w-5 mr-2"></i>
+                            <span id="footer-email">support@gamehub.com</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-phone w-5 mr-2"></i>
+                            <span id="footer-phone">+1 (555) 123-4567</span>
+                        </li>
+                        <li>
+                            <a href="https://wa.me/1234567890" id="footer-whatsapp-link" class="flex items-center text-green-400 hover:text-green-300 transition-colors">
+                                <i class="fab fa-whatsapp w-5 mr-2"></i>
+                                <span id="footer-whatsapp">+1234567890</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8 mt-8 text-center text-gray-400">
+                <p>&copy; 2024 <span id="footer-copyright-name">GameHub</span>. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/1234567890" id="floating-whatsapp" class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-colors z-50" target="_blank">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+
+    <!-- Inquiry Modal -->
+    <div id="inquiryModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-3xl w-full max-h-screen overflow-y-auto animate-pulse-scale">
+            <div class="p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-3xl font-bold text-gray-800">Quick Inquiry</h2>
+                    <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <form id="inquiryForm" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-user text-blue-600 mr-2"></i>Full Name *
+                            </label>
+                            <input type="text" name="name" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none transition-colors" placeholder="Enter your full name">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-envelope text-purple-600 mr-2"></i>Email Address *
+                            </label>
+                            <input type="email" name="email" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none transition-colors" placeholder="your@email.com">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">
+                            <i class="fab fa-whatsapp text-green-600 mr-2"></i>WhatsApp Number *
+                        </label>
+                        <input type="tel" name="mobile" required pattern="[0-9]{10}" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:outline-none transition-colors" placeholder="10-digit mobile number">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">
+                            <i class="fas fa-tag text-orange-600 mr-2"></i>Interested In *
+                        </label>
+                        <select name="subject" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none transition-colors">
+                            <option value="">Select Platform Type</option>
+                            <option value="Sports Betting">Sports Betting</option>
+                            <option value="Casino Games">Casino Games</option>
+                            <option value="Poker">Poker</option>
+                            <option value="Fantasy Sports">Fantasy Sports</option>
+                            <option value="All Platforms">All Platforms</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">
+                            <i class="fas fa-message text-red-600 mr-2"></i>Message
+                        </label>
+                        <textarea name="message" rows="4" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:outline-none transition-colors" placeholder="Any specific requirements or questions?"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white font-bold rounded-lg hover:shadow-2xl transition-all duration-200 transform hover:scale-105">
+                        <i class="fas fa-paper-plane mr-2"></i>Send Inquiry
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- AOS Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Modal functions
+        function openModal() {
+            document.getElementById('inquiryModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('inquiryModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on outside click
+        document.getElementById('inquiryModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Load platforms
+        async function loadPlatforms() {
+            try {
+                const response = await fetch('admin/api/platforms.php');
+                const data = await response.json();
+                
+                const loader = document.getElementById('platformsLoader');
+                const grid = document.getElementById('platformsGrid');
+                const noPlatforms = document.getElementById('noPlatforms');
+                
+                if (data.success && data.data.length > 0) {
+                    const platforms = data.data;
+                    grid.innerHTML = '';
+                    
+                    platforms.forEach((platform, index) => {
+                        const card = createPlatformCard(platform, index);
+                        grid.appendChild(card);
+                    });
+                    
+                    loader.style.display = 'none';
+                    grid.style.display = 'grid';
+                    
+                    // Re-initialize AOS for new elements
+                    AOS.refresh();
+                } else {
+                    loader.style.display = 'none';
+                    noPlatforms.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Failed to load platforms:', error);
+                const loader = document.getElementById('platformsLoader');
+                const noPlatforms = document.getElementById('noPlatforms');
+                loader.style.display = 'none';
+                noPlatforms.style.display = 'block';
+            }
+        }
+
+        function createPlatformCard(platform, index) {
+            const card = document.createElement('div');
+            card.className = 'platform-card bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden';
+            card.setAttribute('data-aos', 'fade-up');
+            card.setAttribute('data-aos-delay', (index * 100).toString());
+            
+            const logoHtml = platform.logo_url 
+                ? `<img src="${platform.logo_url}" alt="${platform.name}" class="platform-logo mx-auto">`
+                : `<div class="platform-logo mx-auto bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                     <i class="fas fa-server text-white text-2xl"></i>
+                   </div>`;
+            
+            const websiteButton = platform.website_link 
+                ? `<a href="${platform.website_link}" target="_blank" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors text-center">
+                     <i class="fas fa-external-link-alt mr-2"></i>Visit Platform
+                   </a>`
+                : `<button class="flex-1 bg-gray-400 text-white px-6 py-3 rounded-lg font-semibold cursor-not-allowed" disabled>
+                     <i class="fas fa-link mr-2"></i>Coming Soon
+                   </button>`;
+            
+            card.innerHTML = `
+                <div class="p-8 text-center">
+                    ${logoHtml}
+                    
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4 mt-6">${platform.name}</h3>
+                    
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        ${platform.description || 'Trusted gaming platform with instant activation and secure transactions.'}
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div class="bg-green-50 p-3 rounded-lg border border-green-200">
+                                <i class="fas fa-bolt text-green-600 mb-1"></i>
+                                <div class="font-semibold text-green-800">Instant ID</div>
+                            </div>
+                            <div class="bg-blue-50 p-3 rounded-lg border border-blue-200">
+                                <i class="fas fa-shield-alt text-blue-600 mb-1"></i>
+                                <div class="font-semibold text-blue-800">100% Secure</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-3">
+                            ${websiteButton}
+                            <button onclick="openModal()" class="flex-1 border-2 border-purple-600 text-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-purple-600 hover:text-white transition-colors">
+                                <i class="fas fa-envelope mr-2"></i>Get ID
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Form submission
+        document.getElementById('inquiryForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitButton = e.target.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.innerHTML;
+            
+            // Show loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
+            
+            try {
+                const formData = new FormData(e.target);
+                const data = {
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    mobile: formData.get('mobile'),
+                    subject: formData.get('subject'),
+                    message: formData.get('message'),
+                    source: 'Platforms Page'
+                };
+                
+                const response = await fetch('admin/api/submit-inquiry.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showSuccessMessage();
+                    e.target.reset();
+                } else {
+                    throw new Error(result.message || result.error || 'Failed to submit inquiry');
+                }
+                
+            } catch (error) {
+                console.error('Error submitting inquiry:', error);
+                showErrorMessage(error.message);
+            } finally {
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalButtonText;
+            }
+        });
+
+        function showSuccessMessage() {
+            const modal = document.getElementById('inquiryModal');
+            const modalContent = modal.querySelector('.bg-white');
+            
+            modalContent.innerHTML = `
+                <div class="text-center py-8">
+                    <div class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-check text-4xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Inquiry Submitted Successfully!</h3>
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                        <p class="text-green-800 font-semibold mb-2">✅ Your request has been received</p>
+                        <p class="text-green-700 text-sm">Our team will contact you on WhatsApp within <strong>5-10 minutes</strong> with platform details and account activation.</p>
+                    </div>
+                    <div class="space-y-2 text-sm text-gray-600 mb-6">
+                        <p><i class="fas fa-whatsapp text-green-500 mr-2"></i>Check your WhatsApp for updates</p>
+                        <p><i class="fas fa-star text-blue-500 mr-2"></i>Best platforms & competitive rates</p>
+                        <p><i class="fas fa-headset text-purple-500 mr-2"></i>24/7 support available</p>
+                    </div>
+                    <button onclick="closeModal()" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-bold transition-colors">
+                        <i class="fas fa-thumbs-up mr-2"></i>Great! Close
+                    </button>
+                </div>
+            `;
+        }
+
+        function showErrorMessage(message) {
+            alert('Error: ' + message + '\n\nPlease try again or contact us directly via WhatsApp.');
+        }
+
+        // Load site configuration
+        async function loadSiteConfig() {
+            try {
+                const response = await fetch('admin/api/site-config.php');
+                const data = await response.json();
+                
+                if (data.success && data.data) {
+                    const config = data.data;
+                    
+                    // Update site name
+                    if (config.site_name) {
+                        document.getElementById('site-name').textContent = config.site_name;
+                        document.getElementById('footer-site-name').textContent = config.site_name;
+                        document.getElementById('footer-copyright-name').textContent = config.site_name;
+                        document.title = 'Gaming Platforms - ' + config.site_name;
+                    }
+                    
+                    // Update favicon
+                    if (config.site_favicon) {
+                        document.getElementById('dynamic-favicon').href = config.site_favicon;
+                    }
+                    
+                    // Update logo if available
+                    if (config.site_logo) {
+                        const navbarLogo = document.getElementById('navbar-logo');
+                        const footerLogo = document.getElementById('footer-logo');
+                        
+                        navbarLogo.innerHTML = `<img src="${config.site_logo}" alt="${config.site_name}" class="h-8 mr-2"><span id="site-name">${config.site_name}</span>`;
+                        footerLogo.innerHTML = `<img src="${config.site_logo}" alt="${config.site_name}" class="h-8 mr-3"><h3 class="text-2xl font-bold text-white" id="footer-site-name">${config.site_name}</h3>`;
+                    }
+                    
+                    // Update contact information
+                    if (config.support_email) {
+                        document.getElementById('footer-email').textContent = config.support_email;
+                    }
+                    
+                    if (config.contact_number) {
+                        document.getElementById('footer-phone').textContent = config.contact_number;
+                    }
+                    
+                    if (config.whatsapp_number) {
+                        const whatsappNumber = config.whatsapp_number;
+                        document.getElementById('footer-whatsapp').textContent = `+91${whatsappNumber}`;
+                        
+                        document.getElementById('footer-whatsapp-link').href = `https://wa.me/91${whatsappNumber}`;
+                        document.getElementById('floating-whatsapp').href = `https://wa.me/91${whatsappNumber}`;
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to load site configuration:', error);
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSiteConfig();
+            loadPlatforms();
+        });
+    </script>
+</body>
+</html>

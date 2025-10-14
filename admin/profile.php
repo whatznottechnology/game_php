@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = $_POST['username'];
             $email = $_POST['email'];
             
-            $stmt = $db->prepare("UPDATE admin_users SET username = ?, email = ? WHERE id = ?");
+            $stmt = $db->prepare("UPDATE admin_users SET username = ?, email = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?");
             $stmt->execute([$username, $email, $admin['id']]);
             
             $_SESSION['admin_username'] = $username;
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             
             $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
-            $stmt = $db->prepare("UPDATE admin_users SET password = ? WHERE id = ?");
+            $stmt = $db->prepare("UPDATE admin_users SET password = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?");
             $stmt->execute([$hashed_password, $admin['id']]);
             
             $message = 'Password changed successfully!';
@@ -203,7 +203,15 @@ $stats['total_games'] = $stmt->fetch(PDO::FETCH_ASSOC)['count'];
                             <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                                 <div>
                                     <p class="text-sm text-gray-600">Account Created</p>
-                                    <p class="font-semibold text-gray-800"><?php echo date('d M Y, h:i A', strtotime($admin['created_at'])); ?></p>
+                                    <p class="font-semibold text-gray-800">
+                                        <?php 
+                                        if (!empty($admin['created_at'])) {
+                                            echo date('d M Y, h:i A', strtotime($admin['created_at'])); 
+                                        } else {
+                                            echo 'Not available';
+                                        }
+                                        ?>
+                                    </p>
                                 </div>
                                 <i class="fas fa-calendar-plus text-2xl text-gray-400"></i>
                             </div>
@@ -211,7 +219,15 @@ $stats['total_games'] = $stmt->fetch(PDO::FETCH_ASSOC)['count'];
                             <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                                 <div>
                                     <p class="text-sm text-gray-600">Last Updated</p>
-                                    <p class="font-semibold text-gray-800"><?php echo date('d M Y, h:i A', strtotime($admin['updated_at'])); ?></p>
+                                    <p class="font-semibold text-gray-800">
+                                        <?php 
+                                        if (!empty($admin['updated_at'])) {
+                                            echo date('d M Y, h:i A', strtotime($admin['updated_at'])); 
+                                        } else {
+                                            echo 'Not available';
+                                        }
+                                        ?>
+                                    </p>
                                 </div>
                                 <i class="fas fa-clock text-2xl text-gray-400"></i>
                             </div>

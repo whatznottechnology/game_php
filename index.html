@@ -9,7 +9,7 @@
     <title>GameHub - Discover Amazing Games & Adventures</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link id="dynamic-favicon" rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -29,15 +29,84 @@
         }
         
         @keyframes pulseScale {
-            0% { transform: scale(0.9); opacity: 0; }
+            0% { transform: scale(0.95); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
         
         @media (max-width: 640px) {
             #inquiryModal {
                 max-width: 95vw;
-                margin: 1rem;
+                margin: 0.5rem;
             }
+            
+            #inquiryModal .p-8 {
+                padding: 1.5rem !important;
+            }
+            
+            #inquiryModal .p-6 {
+                padding: 1rem !important;
+            }
+            
+            #inquiryModal .text-3xl {
+                font-size: 1.5rem !important;
+            }
+            
+            #inquiryModal .w-20 {
+                width: 3.5rem !important;
+                height: 3.5rem !important;
+            }
+            
+            /* Mobile Banner Fixes */
+            .hero-slide {
+                min-height: 100vh !important;
+                background-size: cover !important;
+                background-position: center !important;
+                background-attachment: scroll !important;
+            }
+            
+            .banner-image {
+                width: 100% !important;
+                height: 100vh !important;
+                object-fit: cover !important;
+                object-position: center !important;
+            }
+            
+            .hero-content {
+                padding: 0 1rem !important;
+                z-index: 10 !important;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            .hero-description {
+                font-size: 1rem !important;
+                line-height: 1.5 !important;
+            }
+        }
+        
+        /* Fix modal input text colors */
+        #inquiryModal input,
+        #inquiryModal select,
+        #inquiryModal textarea {
+            color: #1f2937 !important; /* Dark gray text color */
+        }
+        
+        #inquiryModal input::placeholder,
+        #inquiryModal textarea::placeholder {
+            color: #9ca3af !important; /* Light gray placeholder */
+        }
+        
+        #inquiryModal select option {
+            color: #1f2937 !important;
+            background-color: white !important;
         }
     </style>
     
@@ -70,45 +139,36 @@
             <div class="flex items-center justify-between h-16">
                 <!-- Logo -->
                 <div class="flex items-center">
-                    <a href="index.html" class="text-2xl font-bold gradient-text">
-                        <i class="fas fa-gamepad mr-2"></i>GameHub
+                    <a href="index.html" id="navbar-logo" class="text-2xl font-bold gradient-text flex items-center">
+                        <i class="fas fa-gamepad mr-2"></i><span id="site-name"></span>
                     </a>
                 </div>
 
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="text-white hover:text-blue-400 transition-colors">Home</a>
-                    <a href="search.html" class="text-white hover:text-blue-400 transition-colors">Search</a>
-                    <a href="#categories" class="text-white hover:text-blue-400 transition-colors">Categories</a>
-                    <a href="#contact" class="text-white hover:text-blue-400 transition-colors">Contact</a>
-                    <a href="terms.html" class="text-white hover:text-blue-400 transition-colors">T&C</a>
-                </div>
-
-                <!-- Enquiry Button -->
-                <div class="hidden md:block">
+                <!-- Action Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="platforms.html" class="text-gray-700 hover:text-blue-600 transition-colors font-semibold px-4 py-2 rounded-lg hover:bg-blue-50">
+                        <i class="fas fa-server mr-2"></i>Platforms
+                    </a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 transition-colors font-semibold px-4 py-2 rounded-lg hover:bg-blue-50">
+                        <i class="fas fa-phone mr-2"></i>Contact Us
+                    </a>
                     <button onclick="openModal()" class="btn-primary px-6 py-2 rounded-lg font-semibold text-white">
                         <i class="fas fa-envelope mr-2"></i>Enquiry
                     </button>
                 </div>
 
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden">
-                    <button id="mobileMenuBtn" class="text-white focus:outline-none">
-                        <i class="fas fa-bars text-xl"></i>
+                <!-- Mobile Buttons -->
+                <div class="md:hidden flex items-center space-x-2">
+                    <a href="platforms.html" class="text-gray-700 hover:text-blue-600 transition-colors p-2 rounded-lg hover:bg-blue-50">
+                        <i class="fas fa-server text-lg"></i>
+                    </a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 transition-colors p-2 rounded-lg hover:bg-blue-50">
+                        <i class="fas fa-phone text-lg"></i>
+                    </a>
+                    <button onclick="openModal()" class="btn-primary px-4 py-2 rounded-lg font-semibold text-white">
+                        <i class="fas fa-envelope mr-2"></i>Enquiry
                     </button>
                 </div>
-            </div>
-
-            <!-- Mobile Menu -->
-            <div id="mobileMenu" class="md:hidden hidden bg-slate-800 rounded-lg mt-2 p-4">
-                <a href="index.html" class="block py-2 text-white hover:text-blue-400">Home</a>
-                <a href="search.html" class="block py-2 text-white hover:text-blue-400">Search</a>
-                <a href="#categories" class="block py-2 text-white hover:text-blue-400">Categories</a>
-                <a href="#contact" class="block py-2 text-white hover:text-blue-400">Contact</a>
-                <a href="terms.html" class="block py-2 text-white hover:text-blue-400">T&C</a>
-                <button onclick="openModal()" class="btn-primary w-full mt-3 px-4 py-2 rounded-lg font-semibold text-white">
-                    <i class="fas fa-envelope mr-2"></i>Enquiry
-                </button>
             </div>
         </div>
     </nav>
@@ -246,7 +306,7 @@
                     </div>
                     
                     <!-- Featured Games Grid (Loaded from Backend) -->
-                    <div id="featuredGames" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                    <div id="featuredGames" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
                         <!-- Loading State -->
                         <div class="col-span-full text-center py-12">
                             <i class="fas fa-spinner fa-spin text-4xl text-blue-600 mb-3"></i>
@@ -539,9 +599,9 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <!-- Logo & Description -->
                 <div class="md:col-span-2">
-                    <div class="flex items-center mb-4">
+                    <div class="flex items-center mb-4" id="footer-logo">
                         <i class="fas fa-gamepad text-3xl text-blue-400 mr-3"></i>
-                        <h3 class="text-2xl font-bold text-white">GameHub</h3>
+                        <h3 class="text-2xl font-bold text-white" id="footer-site-name"></h3>
                     </div>
                     <p class="text-gray-400 mb-6 max-w-md">
                         Your ultimate destination for discovering and playing amazing games. Join our community of gamers and explore endless adventures!
@@ -567,8 +627,7 @@
                     <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
                     <ul class="space-y-2">
                         <li><a href="index.html" class="text-gray-400 hover:text-blue-400 transition-colors">Home</a></li>
-                        <li><a href="search.html" class="text-gray-400 hover:text-blue-400 transition-colors">Search Games</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">Categories</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-blue-400 transition-colors">Contact Us</a></li>
                         <li><a href="terms.html" class="text-gray-400 hover:text-blue-400 transition-colors">Terms & Conditions</a></li>
                         <li><a href="privacy.html" class="text-gray-400 hover:text-blue-400 transition-colors">Privacy Policy</a></li>
                     </ul>
@@ -580,15 +639,17 @@
                     <div class="space-y-3">
                         <div class="flex items-center text-gray-400">
                             <i class="fas fa-envelope mr-3 text-blue-400"></i>
-                            <span>info@gamehub.com</span>
+                            <span id="footer-email">info@gamehub.com</span>
                         </div>
                         <div class="flex items-center text-gray-400">
                             <i class="fas fa-phone mr-3 text-blue-400"></i>
-                            <span>+1 (555) 123-4567</span>
+                            <span id="footer-phone">+1 (555) 123-4567</span>
                         </div>
                         <div class="flex items-center text-gray-400">
-                            <i class="fas fa-map-marker-alt mr-3 text-blue-400"></i>
-                            <span>123 Gaming Street, Tech City</span>
+                            <i class="fab fa-whatsapp mr-3 text-green-400"></i>
+                            <a id="footer-whatsapp-link" href="https://wa.me/1234567890" target="_blank" class="hover:text-green-400 transition-colors">
+                                <span id="footer-whatsapp">WhatsApp Support</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -604,7 +665,7 @@
 
     <!-- Floating Buttons -->
     <!-- WhatsApp Button -->
-    <a href="https://wa.me/1234567890" target="_blank" class="fixed bottom-20 right-4 w-14 h-14 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center text-white text-xl shadow-lg transition-colors z-50">
+    <a id="floating-whatsapp" href="https://wa.me/1234567890" target="_blank" class="fixed bottom-20 right-4 w-14 h-14 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center text-white text-xl shadow-lg transition-colors z-50">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -615,128 +676,111 @@
 
     <!-- Inquiry Modal -->
     <div id="modalOverlay" class="fixed inset-0 z-50 hidden bg-black bg-opacity-60 flex items-center justify-center p-4">
-        <div id="inquiryModal" class="bg-white max-w-lg w-full rounded-2xl shadow-2xl relative animate-pulse-scale">
+        <div id="inquiryModal" class="bg-white max-w-3xl w-full rounded-3xl shadow-2xl relative animate-pulse-scale max-h-[95vh] overflow-y-auto">
             <!-- Close Button -->
-            <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors z-10">
-                <i class="fas fa-times text-sm"></i>
+            <button onclick="closeModal()" class="absolute top-4 right-4 w-10 h-10 bg-white hover:bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:text-gray-800 transition-all z-10">
+                <i class="fas fa-times text-lg"></i>
             </button>
             
             <!-- Header -->
-            <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-t-2xl text-center">
-                <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-gamepad text-2xl"></i>
+            <div class="bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white p-8 rounded-t-3xl text-center">
+                <div class="w-20 h-20 bg-white bg-opacity-20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <i class="fas fa-gamepad text-3xl"></i>
                 </div>
-                <h3 class="text-2xl font-bold mb-2">Get Your FREE Gaming ID</h3>
+                <h3 class="text-3xl font-bold mb-2">Get Your FREE<br/>Gaming ID</h3>
                 <p class="text-blue-100 text-sm">Instant activation • 5-10 minutes • 100% secure</p>
             </div>
             
-                <form id="inquiryForm" class="space-y-5">
+            <!-- Form Content -->
+            <div class="p-6 space-y-4">
+                <form id="inquiryForm" class="space-y-4">
                     <!-- Name Field -->
-                    <div class="relative">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            <i class="fas fa-user text-blue-500 mr-2"></i>Full Name *
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-user text-blue-600 mr-2"></i>Full Name *
                         </label>
                         <input type="text" name="name" required 
-                               class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white" 
+                               class="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-gray-800 font-medium placeholder-gray-400" 
                                placeholder="Enter your full name">
                     </div>
                     
                     <!-- Phone Field -->
-                    <div class="relative">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            <i class="fab fa-whatsapp text-green-500 mr-2"></i>WhatsApp Number *
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fab fa-whatsapp text-green-600 mr-2"></i>WhatsApp Number *
                         </label>
                         <input type="tel" name="mobile" required pattern="[0-9]{10}" 
-                               class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white" 
+                               class="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-gray-800 font-medium placeholder-gray-400" 
                                placeholder="10-digit mobile number">
-                        <p class="text-xs text-gray-500 mt-1 flex items-center">
-                            <i class="fas fa-info-circle mr-1"></i>We'll contact you on WhatsApp within 5 minutes
+                        <p class="text-xs text-green-600 mt-1.5 flex items-center font-medium">
+                            <i class="fas fa-check-circle mr-1"></i>We'll contact you on WhatsApp within 5 minutes
                         </p>
                     </div>
                     
                     <!-- Email Field -->
-                    <div class="relative">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            <i class="fas fa-envelope text-purple-500 mr-2"></i>Email Address
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-envelope text-purple-600 mr-2"></i>Email Address (Optional)
                         </label>
                         <input type="email" name="email" 
-                               class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white" 
-                               placeholder="your@email.com (optional)">
-                    </div>
-                    
-                    <!-- Quick Platform Selection -->
-                    <div class="relative">
-                        <label class="block text-sm font-medium text-gray-700 mb-3">
-                            <i class="fas fa-star text-yellow-500 mr-2"></i>Choose Your Platform
-                        </label>
-                        <div class="grid grid-cols-2 gap-2 text-sm">
-                            <label class="flex items-center p-3 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
-                                <input type="radio" name="platform" value="Reddy999" class="text-blue-600 mr-2">
-                                <span class="font-medium">Reddy999</span>
-                            </label>
-                            <label class="flex items-center p-3 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
-                                <input type="radio" name="platform" value="KingExch9" class="text-blue-600 mr-2">
-                                <span class="font-medium">KingExch9</span>
-                            </label>
-                            <label class="flex items-center p-3 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
-                                <input type="radio" name="platform" value="BetBhai9" class="text-blue-600 mr-2">
-                                <span class="font-medium">BetBhai9</span>
-                            </label>
-                            <label class="flex items-center p-3 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
-                                <input type="radio" name="platform" value="Any" class="text-blue-600 mr-2">
-                                <span class="font-medium">Any Platform</span>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <!-- Interest Selection -->
-                    <div class="relative">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            <i class="fas fa-gamepad text-red-500 mr-2"></i>Interest
-                        </label>
-                        <select name="interest" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white">
-                            <option value="All Games">All Games</option>
-                            <option value="Cricket Betting">Cricket Betting</option>
-                            <option value="Live Casino">Live Casino</option>
-                            <option value="Teen Patti">Teen Patti & Card Games</option>
-                            <option value="Sports Betting">Sports Betting</option>
-                        </select>
+                               class="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-gray-800 font-medium placeholder-gray-400" 
+                               placeholder="your@email.com">
                     </div>
                     
                     <!-- Benefits Section -->
-                    <div class="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-xl p-4 mt-6">
-                        <div class="flex items-start">
-                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-                                <i class="fas fa-gift text-green-600 text-sm"></i>
+                    <div class="bg-gradient-to-br from-green-50 to-blue-50 border-2 border-green-200 rounded-2xl p-4">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
+                                <i class="fas fa-gift text-white text-lg"></i>
                             </div>
-                            <div class="text-sm">
-                                <p class="font-semibold text-gray-800 mb-2">🎉 What You Get:</p>
-                                <div class="grid grid-cols-1 gap-1 text-gray-700">
-                                    <p>✨ <strong>5-10 mins</strong> instant activation</p>
-                                    <p>💰 Welcome bonus up to <strong>₹10,000</strong></p>
-                                    <p>📱 24/7 WhatsApp support</p>
-                                    <p>🔒 100% secure platform</p>
+                            <div class="flex-1">
+                                <p class="font-bold text-gray-800 mb-3 text-base">🎉 What You Get:</p>
+                                <div class="space-y-2 text-sm text-gray-700">
+                                    <p class="flex items-center">
+                                        <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
+                                            <i class="fas fa-bolt text-green-600 text-xs"></i>
+                                        </span>
+                                        <span><strong>5-10 mins</strong> instant activation</span>
+                                    </p>
+                                    <p class="flex items-center">
+                                        <span class="w-6 h-6 bg-yellow-100 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
+                                            <i class="fas fa-star text-yellow-600 text-xs"></i>
+                                        </span>
+                                        <span>Best odds & <strong>competitive rates</strong></span>
+                                    </p>
+                                    <p class="flex items-center">
+                                        <span class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
+                                            <i class="fas fa-headset text-blue-600 text-xs"></i>
+                                        </span>
+                                        <span>24/7 WhatsApp support</span>
+                                    </p>
+                                    <p class="flex items-center">
+                                        <span class="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
+                                            <i class="fas fa-shield-alt text-purple-600 text-xs"></i>
+                                        </span>
+                                        <span>100% secure platform</span>
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
                     <!-- Action Buttons -->
-                    <div class="flex gap-3 pt-6">
+                    <div class="flex gap-3 pt-4">
                         <button type="button" onclick="closeModal()" 
-                                class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-all duration-200 font-medium">
+                                class="flex-1 px-6 py-3.5 border-2 border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 font-bold">
                             Cancel
                         </button>
                         <button type="submit" 
-                                class="flex-1 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-bold shadow-lg transform hover:scale-105">
-                            <i class="fas fa-rocket mr-2"></i>Get My ID Now!
+                                class="flex-1 px-6 py-3.5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white rounded-xl hover:shadow-2xl transition-all duration-200 font-bold transform hover:scale-105">
+                            <i class="fas fa-rocket mr-2"></i>Get ID Now!
                         </button>
                     </div>
                     
                     <!-- Security Note -->
-                    <div class="text-center mt-4">
+                    <div class="text-center pt-2">
                         <p class="text-xs text-gray-500 flex items-center justify-center">
-                            <i class="fas fa-shield-alt text-green-500 mr-2"></i>
+                            <i class="fas fa-lock text-green-500 mr-1.5"></i>
                             Your information is 100% secure and confidential
                         </p>
                     </div>
@@ -840,6 +884,77 @@
         function showErrorMessage(message) {
             alert('Error: ' + message + '\n\nPlease try again or contact us directly via WhatsApp.');
         }
+        
+        // Load site configuration on page load
+        async function loadSiteConfig() {
+            try {
+                const response = await fetch('admin/api/site-config.php');
+                const data = await response.json();
+                
+                if (data.success && data.data) {
+                    const config = data.data;
+                    
+                    // Update site name
+                    if (config.site_name) {
+                        document.getElementById('site-name').textContent = config.site_name;
+                        document.getElementById('footer-site-name').textContent = config.site_name;
+                        document.title = config.site_name + ' - Discover Amazing Games & Adventures';
+                    }
+                    
+                    // Update favicon
+                    if (config.site_favicon) {
+                        document.getElementById('dynamic-favicon').href = config.site_favicon;
+                    }
+                    
+                    // Update logo if available
+                    if (config.site_logo) {
+                        const navbarLogo = document.getElementById('navbar-logo');
+                        const footerLogo = document.getElementById('footer-logo');
+                        
+                        // Replace icon with image in navbar
+                        navbarLogo.innerHTML = `<img src="${config.site_logo}" alt="${config.site_name}" class="h-8 mr-2"><span id="site-name">${config.site_name}</span>`;
+                        
+                        // Replace icon with image in footer
+                        footerLogo.innerHTML = `<img src="${config.site_logo}" alt="${config.site_name}" class="h-8 mr-3"><h3 class="text-2xl font-bold text-white" id="footer-site-name">${config.site_name}</h3>`;
+                    }
+                    
+                    // Update contact information
+                    if (config.support_email) {
+                        document.getElementById('footer-email').textContent = config.support_email;
+                    }
+                    
+                    if (config.contact_number) {
+                        document.getElementById('footer-phone').textContent = config.contact_number;
+                    }
+                    
+                    if (config.whatsapp_number) {
+                        const whatsappNumber = config.whatsapp_number;
+                        document.getElementById('footer-whatsapp').textContent = `+91${whatsappNumber}`;
+                        
+                        // Update footer WhatsApp link
+                        document.getElementById('footer-whatsapp-link').href = `https://wa.me/91${whatsappNumber}`;
+                        
+                        // Update floating WhatsApp button
+                        document.getElementById('floating-whatsapp').href = `https://wa.me/91${whatsappNumber}`;
+                        
+                        // Update any other WhatsApp links
+                        const whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
+                        whatsappLinks.forEach(link => {
+                            if (!link.id || (link.id !== 'floating-whatsapp' && link.id !== 'footer-whatsapp-link')) {
+                                link.href = `https://wa.me/91${whatsappNumber}`;
+                            }
+                        });
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to load site configuration:', error);
+            }
+        }
+        
+        // Load configuration when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSiteConfig();
+        });
     </script>
 </body>
 </html>

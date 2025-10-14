@@ -9,7 +9,7 @@
     <title>Terms & Conditions - GameHub</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link id="dynamic-favicon" rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -47,50 +47,41 @@
 <body class="font-poppins">
     
     <!-- Navigation -->
-    <nav id="navbar" class="navbar-glass fixed w-full top-0 z-50 transition-all duration-300">
+    <nav id="navbar" class="fixed w-full top-0 z-50 bg-white border-b border-gray-200 transition-all duration-300">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between h-16">
                 <!-- Logo -->
                 <div class="flex items-center">
-                    <a href="index.html" class="text-2xl font-bold gradient-text">
-                        <i class="fas fa-gamepad mr-2"></i>GameHub
+                    <a href="index.html" id="navbar-logo" class="text-2xl font-bold gradient-text flex items-center">
+                        <i class="fas fa-gamepad mr-2"></i><span id="site-name">GameHub</span>
                     </a>
                 </div>
 
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="text-white hover:text-blue-400 transition-colors">Home</a>
-                    <a href="search.html" class="text-white hover:text-blue-400 transition-colors">Search</a>
-                    <a href="index.html#categories" class="text-white hover:text-blue-400 transition-colors">Categories</a>
-                    <a href="index.html#contact" class="text-white hover:text-blue-400 transition-colors">Contact</a>
-                    <a href="terms.html" class="text-blue-400 font-semibold">T&C</a>
-                </div>
-
-                <!-- Enquiry Button -->
-                <div class="hidden md:block">
+                <!-- Action Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="platforms.html" class="text-gray-700 hover:text-blue-600 transition-colors font-semibold px-4 py-2 rounded-lg hover:bg-blue-50">
+                        <i class="fas fa-server mr-2"></i>Platforms
+                    </a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 transition-colors font-semibold px-4 py-2 rounded-lg hover:bg-blue-50">
+                        <i class="fas fa-phone mr-2"></i>Contact Us
+                    </a>
                     <button onclick="openModal()" class="btn-primary px-6 py-2 rounded-lg font-semibold text-white">
                         <i class="fas fa-envelope mr-2"></i>Enquiry
                     </button>
                 </div>
 
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden">
-                    <button id="mobileMenuBtn" class="text-white focus:outline-none">
-                        <i class="fas fa-bars text-xl"></i>
+                <!-- Mobile Buttons -->
+                <div class="md:hidden flex items-center space-x-2">
+                    <a href="platforms.html" class="text-gray-700 hover:text-blue-600 transition-colors p-2 rounded-lg hover:bg-blue-50">
+                        <i class="fas fa-server text-lg"></i>
+                    </a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 transition-colors p-2 rounded-lg hover:bg-blue-50">
+                        <i class="fas fa-phone text-lg"></i>
+                    </a>
+                    <button onclick="openModal()" class="btn-primary px-4 py-2 rounded-lg font-semibold text-white">
+                        <i class="fas fa-envelope mr-2"></i>Enquiry
                     </button>
                 </div>
-            </div>
-
-            <!-- Mobile Menu -->
-            <div id="mobileMenu" class="md:hidden hidden bg-slate-800 rounded-lg mt-2 p-4">
-                <a href="index.html" class="block py-2 text-white hover:text-blue-400">Home</a>
-                <a href="search.html" class="block py-2 text-white hover:text-blue-400">Search</a>
-                <a href="index.html#categories" class="block py-2 text-white hover:text-blue-400">Categories</a>
-                <a href="index.html#contact" class="block py-2 text-white hover:text-blue-400">Contact</a>
-                <a href="terms.html" class="block py-2 text-blue-400 font-semibold">T&C</a>
-                <button onclick="openModal()" class="btn-primary w-full mt-3 px-4 py-2 rounded-lg font-semibold text-white">
-                    <i class="fas fa-envelope mr-2"></i>Enquiry
-                </button>
             </div>
         </div>
     </nav>
@@ -369,5 +360,43 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="assets/js/script.js"></script>
+    
+    <script>
+        // Load site configuration on page load
+        async function loadSiteConfig() {
+            try {
+                const response = await fetch('admin/api/site-config.php');
+                const data = await response.json();
+                
+                if (data.success && data.data) {
+                    const config = data.data;
+                    
+                    // Update site name
+                    if (config.site_name) {
+                        document.getElementById('site-name').textContent = config.site_name;
+                        document.title = 'Terms & Conditions - ' + config.site_name;
+                    }
+                    
+                    // Update favicon
+                    if (config.site_favicon) {
+                        document.getElementById('dynamic-favicon').href = config.site_favicon;
+                    }
+                    
+                    // Update logo if available
+                    if (config.site_logo) {
+                        const navbarLogo = document.getElementById('navbar-logo');
+                        navbarLogo.innerHTML = `<img src="${config.site_logo}" alt="${config.site_name}" class="h-8 mr-2"><span id="site-name">${config.site_name}</span>`;
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to load site configuration:', error);
+            }
+        }
+        
+        // Load configuration when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSiteConfig();
+        });
+    </script>
 </body>
 </html>

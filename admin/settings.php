@@ -13,6 +13,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $settings = $_POST['settings'] ?? [];
         
+        // Handle file uploads
+        $uploadDir = '../assets/uploads/';
+        
+        // Handle logo upload
+        if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
+            $logoFile = $_FILES['logo'];
+            $logoExt = strtolower(pathinfo($logoFile['name'], PATHINFO_EXTENSION));
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'svg'];
+            
+            if (in_array($logoExt, $allowedExtensions)) {
+                $logoName = 'logo_' . time() . '.' . $logoExt;
+                $logoPath = $uploadDir . $logoName;
+                
+                if (move_uploaded_file($logoFile['tmp_name'], $logoPath)) {
+                    $settings['site_logo'] = 'assets/uploads/' . $logoName;
+                    
+                    // Delete old logo if exists
+                    $stmt = $db->prepare("SELECT setting_value FROM site_settings WHERE setting_key = 'site_logo'");
+                    $stmt->execute();
+                    $oldLogo = $stmt->fetchColumn();
+                    if ($oldLogo && file_exists('../' . $oldLogo)) {
+                        unlink('../' . $oldLogo);
+                    }
+                }
+            } else {
+                throw new Exception('Invalid logo file format. Please use JPG, PNG, GIF, or SVG.');
+            }
+        }
+        
+        // Handle favicon upload
+        if (isset($_FILES['favicon']) && $_FILES['favicon']['error'] === UPLOAD_ERR_OK) {
+            $faviconFile = $_FILES['favicon'];
+            $faviconExt = strtolower(pathinfo($faviconFile['name'], PATHINFO_EXTENSION));
+            $allowedFaviconExtensions = ['ico', 'png', 'jpg', 'jpeg', 'gif'];
+            
+            if (in_array($faviconExt, $allowedFaviconExtensions)) {
+                $faviconName = 'favicon_' . time() . '.' . $faviconExt;
+                $faviconPath = $uploadDir . $faviconName;
+                
+                if (move_uploaded_file($faviconFile['tmp_name'], $faviconPath)) {
+                    $settings['site_favicon'] = 'assets/uploads/' . $faviconName;
+                    
+                    // Delete old favicon if exists
+                    $stmt = $db->prepare("SELECT setting_value FROM site_settings WHERE setting_key = 'site_favicon'");
+                    $stmt->execute();
+                    $oldFavicon = $stmt->fetchColumn();
+                    if ($oldFavicon && file_exists('../' . $oldFavicon)) {
+                        unlink('../' . $oldFavicon);
+                    }
+                }
+            } else {
+                throw new Exception('Invalid favicon file format. Please use ICO, PNG, JPG, or GIF.');
+            }
+        }
+        
         $stmt = $db->prepare("UPDATE site_settings SET setting_value = ?, updated_at = CURRENT_TIMESTAMP WHERE setting_key = ?");
         
         foreach ($settings as $key => $value) {
@@ -75,7 +130,7 @@ $admin = getAdminInfo();
             <?php endif; ?>
             
             <!-- Settings Form -->
-            <form method="POST" action="" class="space-y-6">
+            <form method="POST" action="" enctype="multipart/form-data" class="space-y-6">
                 <!-- Basic Information -->
                 <div class="bg-white rounded-xl shadow-lg p-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
@@ -106,21 +161,70 @@ $admin = getAdminInfo();
                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
                                    placeholder="support@gamehub.com">
                         </div>
-                        
+                    </div>
+                </div>
+                
+                <!-- Logo and Favicon -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                        <i class="fas fa-image text-purple-600 mr-2"></i>Logo & Favicon
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Logo Upload -->
                         <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Site Logo Path</label>
-                            <input type="text" name="settings[site_logo]"
-                                   value="<?php echo htmlspecialchars($settingsData['site_logo'] ?? ''); ?>"
-                                   class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
-                                   placeholder="assets/img/logo.png">
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-picture-o text-blue-600 mr-2"></i>Site Logo
+                            </label>
+                            <div class="space-y-3">
+                                <!-- Current Logo Display -->
+                                <?php if (!empty($settingsData['site_logo']) && file_exists('../' . $settingsData['site_logo'])): ?>
+                                    <div class="bg-gray-50 border-2 border-gray-200 rounded-lg p-4">
+                                        <p class="text-sm text-gray-600 mb-2">Current Logo:</p>
+                                        <img src="../<?php echo htmlspecialchars($settingsData['site_logo']); ?>" 
+                                             alt="Current Logo" 
+                                             class="max-h-16 max-w-32 object-contain bg-white border rounded">
+                                    </div>
+                                <?php else: ?>
+                                    <div class="bg-gray-50 border-2 border-gray-200 rounded-lg p-4 text-center">
+                                        <i class="fas fa-image text-gray-400 text-2xl mb-2"></i>
+                                        <p class="text-sm text-gray-500">No logo uploaded</p>
+                                    </div>
+                                <?php endif; ?>
+                                
+                                <!-- Upload Input -->
+                                <input type="file" name="logo" accept=".jpg,.jpeg,.png,.gif,.svg"
+                                       class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-blue-50 file:text-blue-600 hover:file:bg-blue-100">
+                                <p class="text-xs text-gray-500">Supported formats: JPG, PNG, GIF, SVG (Max 2MB)</p>
+                            </div>
                         </div>
                         
+                        <!-- Favicon Upload -->
                         <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Favicon Path</label>
-                            <input type="text" name="settings[site_favicon]"
-                                   value="<?php echo htmlspecialchars($settingsData['site_favicon'] ?? ''); ?>"
-                                   class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
-                                   placeholder="assets/img/favicon.ico">
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-star text-yellow-600 mr-2"></i>Site Favicon
+                            </label>
+                            <div class="space-y-3">
+                                <!-- Current Favicon Display -->
+                                <?php if (!empty($settingsData['site_favicon']) && file_exists('../' . $settingsData['site_favicon'])): ?>
+                                    <div class="bg-gray-50 border-2 border-gray-200 rounded-lg p-4">
+                                        <p class="text-sm text-gray-600 mb-2">Current Favicon:</p>
+                                        <img src="../<?php echo htmlspecialchars($settingsData['site_favicon']); ?>" 
+                                             alt="Current Favicon" 
+                                             class="w-8 h-8 object-contain bg-white border rounded">
+                                    </div>
+                                <?php else: ?>
+                                    <div class="bg-gray-50 border-2 border-gray-200 rounded-lg p-4 text-center">
+                                        <i class="fas fa-star text-gray-400 text-2xl mb-2"></i>
+                                        <p class="text-sm text-gray-500">No favicon uploaded</p>
+                                    </div>
+                                <?php endif; ?>
+                                
+                                <!-- Upload Input -->
+                                <input type="file" name="favicon" accept=".ico,.png,.jpg,.jpeg,.gif"
+                                       class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-yellow-50 file:text-yellow-600 hover:file:bg-yellow-100">
+                                <p class="text-xs text-gray-500">Supported formats: ICO, PNG, JPG, GIF (Max 1MB)</p>
+                            </div>
                         </div>
                     </div>
                 </div>

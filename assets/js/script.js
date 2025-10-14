@@ -210,8 +210,7 @@ async function loadBannersAndInitSlider() {
             }
             
         } else {
-            // Fallback to default banner if no banners found
-            createDefaultBanner();
+            // No banners found - hide loading
             if (loadingElement) {
                 loadingElement.style.display = 'none';
             }
@@ -278,29 +277,10 @@ function createBannerSlide(banner, isActive) {
                 </div>`;
     }
     
-    html += `<p class="text-sm mt-4 opacity-90">✓ 100% Secure | ✓ Instant Withdrawal | ✓ 500+ Active Users</p>`;
-    
     content.innerHTML = html;
     slide.appendChild(content);
     
     return slide;
-}
-
-// Create default banner fallback
-function createDefaultBanner() {
-    const sliderContainer = document.getElementById('heroSlider');
-    if (!sliderContainer) return;
-    
-    const defaultBanner = {
-        title: 'Welcome to GameHub',
-        subtitle: '🎮 PLAY NOW',
-        description: 'Discover amazing games and join our community',
-        button_text: 'Get Started',
-        button_link: '#'
-    };
-    
-    const slide = createBannerSlide(defaultBanner, true);
-    sliderContainer.appendChild(slide);
 }
 
 // Initialize slider controls
@@ -360,9 +340,13 @@ function initSliderControls(slideCount) {
 
 // Modal functionality
 function openModal(modalId = 'inquiryModal') {
+    console.log('Opening modal:', modalId); // Debug log
+    
     // Handle both modalOverlay and inquiryModal
     const overlay = document.getElementById('modalOverlay');
     const modal = document.getElementById(modalId || 'inquiryModal');
+    
+    console.log('Found overlay:', !!overlay, 'Found modal:', !!modal); // Debug log
     
     if (overlay && modal) {
         overlay.classList.remove('hidden');
@@ -370,11 +354,15 @@ function openModal(modalId = 'inquiryModal') {
         modal.classList.remove('hidden');
         modal.classList.add('flex');
         document.body.style.overflow = 'hidden';
+        console.log('Modal opened successfully'); // Debug log
     } else if (modal) {
         // Fallback for other modals
         modal.classList.remove('hidden');
         modal.classList.add('flex');
         document.body.style.overflow = 'hidden';
+        console.log('Modal opened with fallback'); // Debug log
+    } else {
+        console.error('Modal elements not found'); // Debug log
     }
 }
 
@@ -816,7 +804,7 @@ async function loadFeaturedGames() {
                             </div>
                             
                             <button class="w-full bg-${color}-600 hover:bg-${color}-700 text-white px-6 py-3.5 rounded-xl text-sm font-bold transition-colors duration-200" 
-                                    onclick="event.stopPropagation(); openModal('contactModal');">
+                                    onclick="event.stopPropagation(); openModal();">
                                 <i class="fas fa-rocket mr-2"></i>Get ID Now - FREE
                             </button>
                         </div>

@@ -60,15 +60,13 @@ if ($_POST) {
             $error = 'Banner image is required.';
         }
         
-        if (!$error && $title) {
+        if (!$error) {
             $stmt = $db->prepare("INSERT INTO banners (title, subtitle, description, button_text, button_link, background_image, display_order, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             if ($stmt->execute([$title, $subtitle, $description, $button_text, $button_link, $background_image, $display_order, $is_active])) {
                 $message = 'Banner added successfully!';
             } else {
                 $error = 'Failed to add banner.';
             }
-        } elseif (!$title) {
-            $error = 'Title is required.';
         }
     } elseif (isset($_POST['edit_banner'])) {
         // Edit existing banner
@@ -127,15 +125,13 @@ if ($_POST) {
             }
         }
         
-        if (!$error && $title) {
+        if (!$error) {
             $stmt = $db->prepare("UPDATE banners SET title = ?, subtitle = ?, description = ?, button_text = ?, button_link = ?, background_image = ?, display_order = ?, is_active = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?");
             if ($stmt->execute([$title, $subtitle, $description, $button_text, $button_link, $background_image, $display_order, $is_active, $id])) {
                 $message = 'Banner updated successfully!';
             } else {
                 $error = 'Failed to update banner.';
             }
-        } elseif (!$title) {
-            $error = 'Title is required.';
         }
     } elseif (isset($_POST['delete_banner'])) {
         // Delete banner
@@ -267,40 +263,55 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
                         <input type="hidden" name="id" value="<?php echo $edit_banner['id']; ?>">
                         <?php endif; ?>
                         
+                        <!-- Info Notice -->
+                        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-4">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-info-circle text-blue-400"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm text-blue-700">
+                                        <strong>Note:</strong> Only the background image is mandatory. All other fields (title, subtitle, description, button text, button link, display order) are optional and can be left empty if not needed.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Title *</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Title</label>
                                 <input type="text" name="title" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" 
-                                       value="<?php echo $edit_banner ? htmlspecialchars($edit_banner['title']) : ''; ?>" required>
+                                       value="<?php echo $edit_banner ? htmlspecialchars($edit_banner['title']) : ''; ?>" 
+                                       placeholder="Enter banner title (optional)">
                             </div>
                             
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Subtitle</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Subtitle (Optional)</label>
                                 <input type="text" name="subtitle" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" 
                                        value="<?php echo $edit_banner ? htmlspecialchars($edit_banner['subtitle']) : ''; ?>" 
-                                       placeholder="e.g., ⚡ SPECIAL OFFER">
+                                       placeholder="e.g., ⚡ SPECIAL OFFER (optional)">
                             </div>
                         </div>
                         
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Description (Optional)</label>
                             <textarea name="description" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" 
-                                      placeholder="Banner description text"><?php echo $edit_banner ? htmlspecialchars($edit_banner['description']) : ''; ?></textarea>
+                                      placeholder="Banner description text (optional)"><?php echo $edit_banner ? htmlspecialchars($edit_banner['description']) : ''; ?></textarea>
                         </div>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Button Text</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Button Text (Optional)</label>
                                 <input type="text" name="button_text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" 
                                        value="<?php echo $edit_banner ? htmlspecialchars($edit_banner['button_text']) : ''; ?>" 
-                                       placeholder="e.g., Get Started Now">
+                                       placeholder="e.g., Get Started Now (optional)">
                             </div>
                             
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Button Link</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Button Link (Optional)</label>
                                 <input type="url" name="button_link" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" 
                                        value="<?php echo $edit_banner ? htmlspecialchars($edit_banner['button_link']) : ''; ?>" 
-                                       placeholder="https://example.com or #">
+                                       placeholder="https://example.com or # (optional)">
                             </div>
                         </div>
                         
@@ -315,10 +326,10 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
                             </div>
                             
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Display Order</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Display Order (Optional)</label>
                                 <input type="number" name="display_order" min="0" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" 
                                        value="<?php echo $edit_banner ? $edit_banner['display_order'] : '0'; ?>">
-                                <p class="text-xs text-gray-500 mt-1">Lower numbers appear first</p>
+                                <p class="text-xs text-gray-500 mt-1">Lower numbers appear first (default: 0)</p>
                             </div>
                         </div>
                         
