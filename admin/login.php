@@ -68,15 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <i class="fas fa-sign-in-alt mr-2"></i>Login to Dashboard
                 </button>
             </form>
-            
-            <!-- Default Credentials Info -->
-            <div class="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                <p class="text-sm text-yellow-800">
-                    <i class="fas fa-info-circle mr-2"></i><strong>Default Login:</strong><br>
-                    Username: <code class="bg-yellow-100 px-2 py-1 rounded">admin</code><br>
-                    Password: <code class="bg-yellow-100 px-2 py-1 rounded">admin123</code>
-                </p>
-            </div>
         </div>
         
         <p class="text-center text-white mt-6">

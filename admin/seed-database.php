@@ -33,6 +33,7 @@ try {
     $db->exec("DELETE FROM games");
     $db->exec("DELETE FROM categories");
     $db->exec("DELETE FROM inquiries");
+    $db->exec("DELETE FROM platforms");
     
     // Insert Categories
     echo "<div class='mb-4'>
@@ -226,6 +227,62 @@ try {
         ]);
         
         echo "<p class='text-sm text-green-600 ml-4'><i class='fas fa-check mr-2'></i>Added: {$game['name']}</p>";
+    }
+    
+    echo "</div>";
+    
+    // Insert Platforms
+    echo "<div class='mb-4'>
+            <h2 class='text-xl font-bold text-gray-700 mb-3'><i class='fas fa-building text-green-600 mr-2'></i>Adding Platforms...</h2>";
+    
+    $platforms = [
+        [
+            'name' => 'Reddy999',
+            'logo' => 'assets/img/platforms/platform_1760461321_68ee820914eb3.png',
+            'website_link' => 'https://reddy999.com',
+            'description' => 'Leading betting platform with cricket, casino, and sports betting.',
+            'display_order' => 1
+        ],
+        [
+            'name' => 'Tenexch',
+            'logo' => 'assets/img/platforms/platform_1760462072.png',
+            'website_link' => 'https://tenexch.com',
+            'description' => 'Trusted exchange platform for all betting needs.',
+            'display_order' => 2
+        ],
+        [
+            'name' => 'KingExch9',
+            'logo' => '',
+            'website_link' => 'https://kingexch9.com',
+            'description' => 'Premium betting exchange with live casino games.',
+            'display_order' => 3
+        ],
+        [
+            'name' => 'BetBhai9',
+            'logo' => '',
+            'website_link' => 'https://betbhai9.com',
+            'description' => 'Popular platform for sports and casino betting.',
+            'display_order' => 4
+        ],
+        [
+            'name' => 'AKQ777',
+            'logo' => '',
+            'website_link' => 'https://akq777.com',
+            'description' => 'Comprehensive betting platform with poker and casino.',
+            'display_order' => 5
+        ]
+    ];
+    
+    foreach ($platforms as $platform) {
+        $stmt = $db->prepare("INSERT INTO platforms (name, logo, website_link, description, display_order, status) VALUES (?, ?, ?, ?, ?, 'active')");
+        $stmt->execute([
+            $platform['name'],
+            $platform['logo'],
+            $platform['website_link'],
+            $platform['description'],
+            $platform['display_order']
+        ]);
+        echo "<p class='text-sm text-green-600 ml-4'><i class='fas fa-check mr-2'></i>Added: {$platform['name']}</p>";
     }
     
     echo "</div>";

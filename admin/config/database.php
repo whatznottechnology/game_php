@@ -100,6 +100,19 @@ class Database {
             updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )");
         
+        // Platforms Table
+        $this->db->exec("CREATE TABLE IF NOT EXISTS platforms (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            logo TEXT,
+            website_link TEXT,
+            description TEXT,
+            display_order INTEGER DEFAULT 0,
+            status TEXT DEFAULT 'active',
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )");
+        
         // Visitor Analytics Table
         $this->db->exec("CREATE TABLE IF NOT EXISTS visitor_logs (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -134,7 +147,7 @@ class Database {
     private function createDefaultSettings() {
         $defaultSettings = [
             'site_name' => 'GameHub - Premium Betting Platform',
-            'site_logo' => 'assets/img/logo.png',
+            'site_logo' => 'assets/img/logo_1760458275.png',
             'site_favicon' => 'assets/img/favicon.ico',
             'contact_number' => '+1 (555) 123-4567',
             'whatsapp_number' => '1234567890',
