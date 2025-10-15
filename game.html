@@ -583,12 +583,12 @@
 
     <!-- Floating Buttons -->
     <!-- WhatsApp Button -->
-    <a id="floating-whatsapp" href="https://wa.me/1234567890" target="_blank" class="fixed bottom-20 right-4 w-14 h-14 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center text-white text-xl shadow-lg transition-colors z-50">
+    <a id="floating-whatsapp" href="https://wa.me/1234567890" target="_blank" class="fixed bottom-20 right-4 w-12 h-12 md:w-14 md:h-14 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center text-white text-lg md:text-xl shadow-lg transition-colors z-50">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <!-- Telegram Floating Button -->
-    <a id="floating-telegram" href="#" target="_blank" class="fixed bottom-20 left-4 w-14 h-14 bg-blue-500 hover:bg-blue-600 rounded-full flex items-center justify-center text-white text-xl shadow-lg transition-colors z-50" style="display: none;">
+    <a id="floating-telegram" href="#" target="_blank" class="fixed bottom-20 left-4 w-12 h-12 md:w-14 md:h-14 bg-blue-500 hover:bg-blue-600 rounded-full flex items-center justify-center text-white text-lg md:text-xl shadow-lg transition-colors z-50" style="display: none;">
         <i class="fab fa-telegram"></i>
     </a>
 
@@ -1046,7 +1046,7 @@
                         const footerLogo = document.getElementById('footer-logo');
                         
                         // Replace icon with image in navbar
-                        navbarLogo.innerHTML = `<img src="${config.site_logo}" alt="${config.site_name}" class="h-8 mr-2"><span id="site-name">${config.site_name}</span>`;
+                        navbarLogo.innerHTML = `<img src="${config.site_logo}" alt="${config.site_name}" class="h-10 mr-2"><span id="site-name">${config.site_name}</span>`;
                         
                         // Replace icon with image in footer
                         footerLogo.innerHTML = `<img src="${config.site_logo}" alt="${config.site_name}" class="h-8 mr-3"><h3 class="text-2xl font-bold text-white" id="footer-site-name">${config.site_name}</h3>`;
@@ -1070,17 +1070,20 @@
                         // For WhatsApp links, remove + if present
                         const whatsappForLink = whatsappNumber.replace(/^\+/, '').replace(/\s+/g, '');
                         
+                        // Pre-filled message for WhatsApp
+                        const whatsappMessage = encodeURIComponent("I want a new ID");
+                        
                         // Update footer WhatsApp link
-                        document.getElementById('footer-whatsapp-link').href = `https://wa.me/${whatsappForLink}`;
+                        document.getElementById('footer-whatsapp-link').href = `https://wa.me/${whatsappForLink}?text=${whatsappMessage}`;
                         
                         // Update floating WhatsApp button
-                        document.getElementById('floating-whatsapp').href = `https://wa.me/${whatsappForLink}`;
+                        document.getElementById('floating-whatsapp').href = `https://wa.me/${whatsappForLink}?text=${whatsappMessage}`;
                         
                         // Update any other WhatsApp links
                         const whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
                         whatsappLinks.forEach(link => {
                             if (!link.id || (link.id !== 'floating-whatsapp' && link.id !== 'footer-whatsapp-link')) {
-                                link.href = `https://wa.me/${whatsappForLink}`;
+                                link.href = `https://wa.me/${whatsappForLink}?text=${whatsappMessage}`;
                             }
                         });
                     }

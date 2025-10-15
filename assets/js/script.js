@@ -271,7 +271,7 @@ function createBannerSlide(banner, isActive) {
                     <button ${buttonAction} class="bg-yellow-400 text-gray-900 px-10 py-4 rounded-lg font-bold text-lg hover:bg-yellow-300 transition-colors shadow-lg">
                         <i class="fas fa-rocket mr-2"></i>${banner.button_text}
                     </button>
-                    <a href="https://wa.me/1234567890" class="bg-green-500 text-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-green-600 transition-colors shadow-lg">
+                    <a href="https://wa.me/1234567890?text=I%20want%20a%20new%20ID" class="bg-green-500 text-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-green-600 transition-colors shadow-lg">
                         <i class="fab fa-whatsapp mr-2"></i>WhatsApp Support
                     </a>
                 </div>`;

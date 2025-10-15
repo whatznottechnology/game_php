@@ -124,6 +124,21 @@ class Database {
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )");
         
+        // Banners Table
+        $this->db->exec("CREATE TABLE IF NOT EXISTS banners (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT,
+            subtitle TEXT,
+            description TEXT,
+            button_text TEXT,
+            button_link TEXT,
+            background_image TEXT,
+            display_order INTEGER DEFAULT 0,
+            is_active INTEGER DEFAULT 1,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )");
+        
         // Insert default admin user if not exists
         $this->createDefaultAdmin();
         

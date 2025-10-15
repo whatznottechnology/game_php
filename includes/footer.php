@@ -120,11 +120,19 @@ function updateFooterWithConfig(config) {
     
     if (config.whatsapp_number) {
         const whatsappNumber = config.whatsapp_number;
-        document.getElementById('footer-whatsapp').textContent = `+91${whatsappNumber}`;
+        
+        // Display number with + in footer
+        document.getElementById('footer-whatsapp').textContent = `${whatsappNumber}`;
+        
+        // For WhatsApp links, remove + if present
+        const whatsappForLink = whatsappNumber.replace(/^\+/, '').replace(/\s+/g, '');
+        
+        // Pre-filled message for WhatsApp
+        const whatsappMessage = encodeURIComponent("I want a new ID");
         
         // Update WhatsApp links
-        document.getElementById('footer-whatsapp-link').href = `https://wa.me/91${whatsappNumber}`;
-        document.getElementById('floating-whatsapp').href = `https://wa.me/91${whatsappNumber}`;
+        document.getElementById('footer-whatsapp-link').href = `https://wa.me/${whatsappForLink}?text=${whatsappMessage}`;
+        document.getElementById('floating-whatsapp').href = `https://wa.me/${whatsappForLink}?text=${whatsappMessage}`;
     }
     
     // Update social media links

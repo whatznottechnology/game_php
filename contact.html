@@ -527,7 +527,7 @@
                         const footerLogo = document.getElementById('footer-logo');
                         
                         // Replace icon with image in navbar
-                        navbarLogo.innerHTML = `<img src="${config.site_logo}" alt="${config.site_name}" class="h-8 mr-2"><span id="site-name">${config.site_name}</span>`;
+                        navbarLogo.innerHTML = `<img src="${config.site_logo}" alt="${config.site_name}" class="h-10 mr-2"><span id="site-name">${config.site_name}</span>`;
                         
                         // Replace icon with image in footer
                         footerLogo.innerHTML = `<img src="${config.site_logo}" alt="${config.site_name}" class="h-8 mr-3"><h3 class="text-2xl font-bold text-white" id="footer-site-name">${config.site_name}</h3>`;
@@ -554,10 +554,13 @@
                         // For WhatsApp links, remove + if present
                         const whatsappForLink = whatsappNumber.replace(/^\+/, '').replace(/\s+/g, '');
                         
+                        // Pre-filled message for WhatsApp
+                        const whatsappMessage = encodeURIComponent("I want a new ID");
+                        
                         // Update WhatsApp links
-                        document.getElementById('contact-whatsapp-link').href = `https://wa.me/${whatsappForLink}`;
-                        document.getElementById('footer-whatsapp-link').href = `https://wa.me/${whatsappForLink}`;
-                        document.getElementById('floating-whatsapp').href = `https://wa.me/${whatsappForLink}`;
+                        document.getElementById('contact-whatsapp-link').href = `https://wa.me/${whatsappForLink}?text=${whatsappMessage}`;
+                        document.getElementById('footer-whatsapp-link').href = `https://wa.me/${whatsappForLink}?text=${whatsappMessage}`;
+                        document.getElementById('floating-whatsapp').href = `https://wa.me/${whatsappForLink}?text=${whatsappMessage}`;
                     }
                     
                     // Update social media links
