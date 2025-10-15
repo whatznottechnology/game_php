@@ -150,11 +150,12 @@ class Database {
             'site_logo' => 'assets/img/logo_1760458275.png',
             'site_favicon' => 'assets/img/favicon.ico',
             'contact_number' => '+1 (555) 123-4567',
-            'whatsapp_number' => '1234567890',
+            'whatsapp_number' => '+91 1234567890',
             'facebook_url' => 'https://facebook.com/gamehub',
             'twitter_url' => 'https://twitter.com/gamehub',
             'instagram_url' => 'https://instagram.com/gamehub',
             'youtube_url' => 'https://youtube.com/gamehub',
+            'telegram_url' => 'https://t.me/gamehub',
             'support_email' => 'support@gamehub.com',
             'admin_email' => 'admin@gamehub.com'
         ];
@@ -167,6 +168,16 @@ class Database {
             $stmt = $this->db->prepare("INSERT INTO site_settings (setting_key, setting_value) VALUES (?, ?)");
             foreach ($defaultSettings as $key => $value) {
                 $stmt->execute([$key, $value]);
+            }
+        } else {
+            // Add telegram_url if it doesn't exist
+            $stmt = $this->db->prepare("SELECT COUNT(*) as count FROM site_settings WHERE setting_key = 'telegram_url'");
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if ($result['count'] == 0) {
+                $stmt = $this->db->prepare("INSERT INTO site_settings (setting_key, setting_value) VALUES (?, ?)");
+                $stmt->execute(['telegram_url', 'https://t.me/gamehub']);
             }
         }
     }

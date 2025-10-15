@@ -248,13 +248,13 @@ $admin = getAdminInfo();
                         
                         <div>
                             <label class="block text-gray-700 font-semibold mb-2">
-                                <i class="fab fa-whatsapp mr-2 text-green-600"></i>WhatsApp Number *
+                                <i class="fab fa-whatsapp mr-2 text-green-600"></i>WhatsApp Number (with country code) *
                             </label>
                             <input type="text" name="settings[whatsapp_number]" required
                                    value="<?php echo htmlspecialchars($settingsData['whatsapp_number'] ?? ''); ?>"
                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
-                                   placeholder="1234567890">
-                            <p class="text-xs text-gray-500 mt-1">Enter without + or country code</p>
+                                   placeholder="+91 1234567890 or +1 234-567-8900">
+                            <p class="text-xs text-gray-500 mt-1">Enter with country code (e.g., +91 for India, +1 for US)</p>
                         </div>
                     </div>
                 </div>
@@ -304,6 +304,16 @@ $admin = getAdminInfo();
                                    value="<?php echo htmlspecialchars($settingsData['youtube_url'] ?? ''); ?>"
                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
                                    placeholder="https://youtube.com/gamehub">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fab fa-telegram mr-2 text-blue-500"></i>Telegram URL
+                            </label>
+                            <input type="url" name="settings[telegram_url]"
+                                   value="<?php echo htmlspecialchars($settingsData['telegram_url'] ?? ''); ?>"
+                                   class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                                   placeholder="https://t.me/gamehub">
                         </div>
                     </div>
                 </div>

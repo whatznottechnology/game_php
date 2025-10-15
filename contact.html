@@ -256,6 +256,18 @@
                                     <p id="contact-phone" class="font-semibold text-gray-800 truncate">+1 (555) 123-4567</p>
                                 </div>
                             </div>
+                            
+                            <div class="flex items-center" id="contact-telegram" style="display: none;">
+                                <div class="w-10 h-10 md:w-12 md:h-12 bg-blue-100 rounded-full flex items-center justify-center mr-3 md:mr-4 flex-shrink-0">
+                                    <i class="fab fa-telegram text-blue-600 text-lg md:text-xl"></i>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <p class="text-gray-600 text-sm">Join our Telegram</p>
+                                    <a id="contact-telegram-link" href="#" target="_blank" class="font-semibold text-gray-800 hover:text-blue-600 transition-colors truncate block">
+                                        <span>Telegram Channel</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
@@ -314,18 +326,21 @@
                     <p class="text-gray-400 mb-6 max-w-md">
                         Your ultimate destination for discovering and playing amazing games. Join our community of gamers and explore endless adventures!
                     </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-blue-400 text-2xl transition-colors">
+                    <div class="flex space-x-4" id="social-media-links">
+                        <a href="#" id="footer-facebook-link" class="text-gray-400 hover:text-blue-400 text-2xl transition-colors" style="display: none;">
                             <i class="fab fa-facebook"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-blue-400 text-2xl transition-colors">
+                        <a href="#" id="footer-twitter-link" class="text-gray-400 hover:text-blue-400 text-2xl transition-colors" style="display: none;">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-blue-400 text-2xl transition-colors">
+                        <a href="#" id="footer-instagram-link" class="text-gray-400 hover:text-pink-400 text-2xl transition-colors" style="display: none;">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-blue-400 text-2xl transition-colors">
+                        <a href="#" id="footer-youtube-link" class="text-gray-400 hover:text-red-400 text-2xl transition-colors" style="display: none;">
                             <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" id="footer-telegram-link" class="text-gray-400 hover:text-blue-500 text-2xl transition-colors" style="display: none;">
+                            <i class="fab fa-telegram"></i>
                         </a>
                     </div>
                 </div>
@@ -359,6 +374,12 @@
                                 <span id="footer-whatsapp">WhatsApp Support</span>
                             </a>
                         </div>
+                        <div class="flex items-center text-gray-400" id="footer-telegram-contact" style="display: none;">
+                            <i class="fab fa-telegram mr-3 text-blue-500"></i>
+                            <a id="footer-telegram-contact-link" href="#" target="_blank" class="hover:text-blue-500 transition-colors">
+                                <span>Telegram Channel</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -375,6 +396,11 @@
     <!-- WhatsApp Button -->
     <a id="floating-whatsapp" href="https://wa.me/1234567890" target="_blank" class="fixed bottom-20 right-4 w-12 h-12 md:w-14 md:h-14 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center text-white text-lg md:text-xl shadow-lg transition-colors z-50">
         <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Telegram Floating Button -->
+    <a id="floating-telegram" href="#" target="_blank" class="fixed bottom-20 left-4 w-12 h-12 md:w-14 md:h-14 bg-blue-500 hover:bg-blue-600 rounded-full flex items-center justify-center text-white text-lg md:text-xl shadow-lg transition-colors z-50" style="display: none;">
+        <i class="fab fa-telegram"></i>
     </a>
 
     <!-- Back to Top Button -->
@@ -520,13 +546,66 @@
                     
                     if (config.whatsapp_number) {
                         const whatsappNumber = config.whatsapp_number;
-                        document.getElementById('contact-whatsapp').textContent = `+91${whatsappNumber}`;
-                        document.getElementById('footer-whatsapp').textContent = `+91${whatsappNumber}`;
+                        
+                        // Display number with + in contact and footer
+                        document.getElementById('contact-whatsapp').textContent = `${whatsappNumber}`;
+                        document.getElementById('footer-whatsapp').textContent = `${whatsappNumber}`;
+                        
+                        // For WhatsApp links, remove + if present
+                        const whatsappForLink = whatsappNumber.replace(/^\+/, '').replace(/\s+/g, '');
                         
                         // Update WhatsApp links
-                        document.getElementById('contact-whatsapp-link').href = `https://wa.me/91${whatsappNumber}`;
-                        document.getElementById('footer-whatsapp-link').href = `https://wa.me/91${whatsappNumber}`;
-                        document.getElementById('floating-whatsapp').href = `https://wa.me/91${whatsappNumber}`;
+                        document.getElementById('contact-whatsapp-link').href = `https://wa.me/${whatsappForLink}`;
+                        document.getElementById('footer-whatsapp-link').href = `https://wa.me/${whatsappForLink}`;
+                        document.getElementById('floating-whatsapp').href = `https://wa.me/${whatsappForLink}`;
+                    }
+                    
+                    // Update social media links
+                    if (config.facebook_url) {
+                        const facebookLink = document.getElementById('footer-facebook-link');
+                        facebookLink.href = config.facebook_url;
+                        facebookLink.style.display = 'inline-block';
+                    }
+                    
+                    if (config.twitter_url) {
+                        const twitterLink = document.getElementById('footer-twitter-link');
+                        twitterLink.href = config.twitter_url;
+                        twitterLink.style.display = 'inline-block';
+                    }
+                    
+                    if (config.instagram_url) {
+                        const instagramLink = document.getElementById('footer-instagram-link');
+                        instagramLink.href = config.instagram_url;
+                        instagramLink.style.display = 'inline-block';
+                    }
+                    
+                    if (config.youtube_url) {
+                        const youtubeLink = document.getElementById('footer-youtube-link');
+                        youtubeLink.href = config.youtube_url;
+                        youtubeLink.style.display = 'inline-block';
+                    }
+                    
+                    // Update Telegram links
+                    if (config.telegram_url) {
+                        const telegramLink = document.getElementById('footer-telegram-link');
+                        const telegramContactLink = document.getElementById('footer-telegram-contact-link');
+                        const telegramContact = document.getElementById('footer-telegram-contact');
+                        const floatingTelegram = document.getElementById('floating-telegram');
+                        const contactTelegram = document.getElementById('contact-telegram');
+                        const contactTelegramLink = document.getElementById('contact-telegram-link');
+                        
+                        telegramLink.href = config.telegram_url;
+                        telegramLink.style.display = 'inline-block';
+                        
+                        telegramContactLink.href = config.telegram_url;
+                        telegramContact.style.display = 'flex';
+                        
+                        floatingTelegram.href = config.telegram_url;
+                        floatingTelegram.style.display = 'flex';
+                        
+                        // Show Telegram in contact section
+                        contactTelegramLink.href = config.telegram_url;
+                        contactTelegram.style.display = 'flex';
                     }
                 }
             } catch (error) {

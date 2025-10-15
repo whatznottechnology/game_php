@@ -10,7 +10,7 @@ try {
     $db = Database::getInstance()->getConnection();
     
     // Fetch site configuration
-    $stmt = $db->query("SELECT setting_key, setting_value FROM site_settings WHERE setting_key IN ('site_name', 'site_logo', 'site_favicon', 'whatsapp_number', 'contact_number', 'admin_email', 'support_email')");
+    $stmt = $db->query("SELECT setting_key, setting_value FROM site_settings WHERE setting_key IN ('site_name', 'site_logo', 'site_favicon', 'whatsapp_number', 'contact_number', 'admin_email', 'support_email', 'facebook_url', 'twitter_url', 'instagram_url', 'youtube_url', 'telegram_url')");
     
     $config = [];
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -25,6 +25,11 @@ try {
     $config['contact_number'] = $config['contact_number'] ?? '';
     $config['admin_email'] = $config['admin_email'] ?? '';
     $config['support_email'] = $config['support_email'] ?? '';
+    $config['facebook_url'] = $config['facebook_url'] ?? '';
+    $config['twitter_url'] = $config['twitter_url'] ?? '';
+    $config['instagram_url'] = $config['instagram_url'] ?? '';
+    $config['youtube_url'] = $config['youtube_url'] ?? '';
+    $config['telegram_url'] = $config['telegram_url'] ?? '';
     
     // Check if files exist
     if (!empty($config['site_logo']) && !file_exists('../../' . $config['site_logo'])) {
