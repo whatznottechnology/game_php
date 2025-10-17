@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+
     // Game filtering
     const filterButtons = document.querySelectorAll('.filter-btn');
     const gameCards = document.querySelectorAll('.game-card');
@@ -55,8 +56,9 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.remove('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
             this.classList.add('bg-primary', 'text-white');
             
-            // Filter games
-            gameCards.forEach(card => {
+            // Filter games - query live set to include dynamically loaded cards
+            const currentGameCards = document.querySelectorAll('.game-card');
+            currentGameCards.forEach(card => {
                 if (filter === 'all' || card.getAttribute('data-category') === filter) {
                     card.style.display = 'block';
                 } else {
@@ -66,29 +68,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Category filtering from sidebar
-    const categoryButtons = document.querySelectorAll('.category-btn');
-    categoryButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const category = this.getAttribute('data-category');
-            
-            // Update active button
-            categoryButtons.forEach(btn => btn.classList.remove('bg-blue-50', 'text-blue-600', 'border-blue-200'));
-            categoryButtons.forEach(btn => btn.classList.add('hover:bg-gray-50'));
-            
-            this.classList.add('bg-blue-50', 'text-blue-600', 'border-blue-200');
-            this.classList.remove('hover:bg-gray-50');
-            
-            // Filter games
-            gameCards.forEach(card => {
-                if (category === 'all' || card.getAttribute('data-category') === category) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+    // Category clicks (delegated) - sidebar categories are loaded dynamically
+    const categoriesContainerEl = document.getElementById('categoriesContainer');
+    if (categoriesContainerEl) {
+        categoriesContainerEl.addEventListener('click', function(e) {
+            const item = e.target.closest('.category-menu-item');
+            if (!item) return;
+            const category = item.getAttribute('data-category') || item.getAttribute('data-filter') || 'all';
+            // Use the shared filter function and pass the clicked element for styling
+            window.filterGames(category, item);
         });
-    });
+    }
 
     // Search functionality
     const searchInput = document.getElementById('searchInput');
@@ -114,35 +104,62 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize page-specific functionality
     initPageSpecific();
+
+    // Load categories
+    loadCategories();
 });
 
 // Global filter function for category buttons
-window.filterGames = function(category) {
+window.filterGames = function(category, clickedElem) {
     const gameCards = document.querySelectorAll('.game-card');
     const categoryButtons = document.querySelectorAll('.category-menu-item');
     const contentTitle = document.getElementById('contentTitle');
-    
-    // Update active button styling
+
+    // Update active button styling (update both container and inner label color)
     categoryButtons.forEach(btn => {
         btn.classList.remove('bg-blue-500', 'text-white');
-        btn.classList.add('bg-white', 'border', 'border-gray-200', 'text-gray-700', 'hover:bg-gray-100');
+        btn.classList.add('bg-white', 'border', 'border-gray-200', 'hover:bg-gray-100');
+        const lbl = btn.querySelector('span');
+        if (lbl) {
+            lbl.classList.remove('text-white', 'text-gray-800', 'text-gray-700');
+            lbl.classList.add('text-gray-700');
+        }
     });
-    
-    // Set active button
-    event.target.closest('.category-menu-item').classList.remove('bg-white', 'border', 'border-gray-200', 'text-gray-700', 'hover:bg-gray-100');
-    event.target.closest('.category-menu-item').classList.add('bg-blue-500', 'text-white');
-    
+
+    // If an element was passed, mark it active and ensure its label is white
+    if (clickedElem) {
+        clickedElem.classList.remove('bg-white', 'border', 'border-gray-200', 'hover:bg-gray-100');
+        clickedElem.classList.add('bg-blue-500', 'text-white');
+        const activeLbl = clickedElem.querySelector('span');
+        if (activeLbl) {
+            activeLbl.classList.remove('text-gray-700', 'text-gray-800');
+            activeLbl.classList.add('text-white');
+        }
+    }
+
     // Filter games
     gameCards.forEach(card => {
-        const cardCategory = card.getAttribute('data-category');
-        if (category === 'all' || cardCategory === category) {
+        const cardCategory = (card.getAttribute('data-category') || '').toString().toLowerCase().trim();
+        const filterKey = (category || '').toString().toLowerCase().trim();
+
+        // Show card when filter is 'all' or when categories match (exact or partial)
+        if (filterKey === 'all' || cardCategory === filterKey || cardCategory.includes(filterKey) || filterKey.includes(cardCategory)) {
             card.style.display = 'block';
         } else {
             card.style.display = 'none';
         }
     });
-    
-    // Update title
+
+    // Prefer updating title from clicked element label; otherwise fallback to map
+    if (clickedElem && contentTitle) {
+        const labelEl = clickedElem.querySelector('span');
+        const label = labelEl ? labelEl.textContent.trim() : clickedElem.textContent.trim();
+        if (label) {
+            contentTitle.textContent = label;
+            return;
+        }
+    }
+
     if (contentTitle) {
         const titles = {
             'all': 'All Betting Platforms Available',
@@ -560,6 +577,28 @@ function showNotification(message, type = 'info') {
 }
 
 // Page-specific initialization
+// Update WhatsApp navbar buttons with backend number and greeting
+async function updateNavbarWhatsApp() {
+    try {
+        const response = await fetch('admin/api/site-config.php');
+        const data = await response.json();
+        if (data.success && data.data && data.data.whatsapp_number) {
+            const whatsappNumber = data.data.whatsapp_number;
+            // Remove + and spaces for WhatsApp link
+            const whatsappForLink = whatsappNumber.replace(/^\+/, '').replace(/\s+/g, '');
+            const whatsappMessage = encodeURIComponent('I want a new ID');
+            const waUrl = `https://wa.me/${whatsappForLink}?text=${whatsappMessage}`;
+            const desktopBtn = document.getElementById('navbar-whatsapp-desktop');
+            const mobileBtn = document.getElementById('navbar-whatsapp-mobile');
+            if (desktopBtn) desktopBtn.href = waUrl;
+            if (mobileBtn) mobileBtn.href = waUrl;
+        }
+    } catch (e) {
+        console.error('Failed to update WhatsApp navbar:', e);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', updateNavbarWhatsApp);
 function initPageSpecific() {
     const path = window.location.pathname;
     const filename = path.substring(path.lastIndexOf('/') + 1);
@@ -820,20 +859,69 @@ async function loadFeaturedGames() {
             }
             
         } else {
-            // Fallback to show static games if no dynamic games available
-            console.log('No featured games found, showing static fallback');
-            featuredGamesContainer.innerHTML = '<div class="col-span-full text-center py-12"><p class="text-gray-600">No featured games available at the moment.</p></div>';
-            
-            // Show static games grid as fallback
-            const staticGrid = document.getElementById('gamesGrid');
-            if (staticGrid) {
-                staticGrid.classList.remove('hidden');
-                staticGrid.classList.add('grid');
-            }
+            // No featured games found - show empty state (do NOT reveal static fallback data)
+            console.log('No featured games found, showing empty state');
+            featuredGamesContainer.innerHTML = '<div class="col-span-full text-center py-12"><p class="text-gray-600">No featured platforms available at the moment.</p></div>';
         }
         
     } catch (error) {
         console.error('Error loading featured games:', error);
         featuredGamesContainer.innerHTML = '<div class="col-span-full text-center py-12"><div class="text-red-500"><i class="fas fa-exclamation-triangle text-2xl mb-2"></i><p>Unable to load games. Please try again later.</p></div></div>';
+    }
+}
+
+// Load categories from API and populate sidebar
+async function loadCategories() {
+    const categoriesContainer = document.getElementById('categoriesContainer');
+
+    if (!categoriesContainer) {
+        console.log('Categories container not found');
+        return;
+    }
+
+    try {
+        const response = await fetch('admin/api/categories.php');
+        const data = await response.json();
+
+        if (data.success && data.data.length > 0) {
+            // Use real category slug values so they match game card data-category
+            const categoriesHtml = data.data.map(category => {
+                const filterValue = category.slug || 'general';
+                const iconHtml = category.icon_path
+                    ? `<img src="${category.icon_path}" alt="${category.name}" class="w-5 h-5 mr-3 rounded">`
+                    : `<i class="fas fa-gamepad w-5 h-5 mr-3 text-blue-600"></i>`;
+
+                return `
+                    <div class="category-menu-item bg-white border border-gray-200 rounded-lg p-3 cursor-pointer hover:bg-gray-50 transition-colors duration-200"
+                         data-category="${filterValue}">
+                        <div class="flex items-center">
+                            ${iconHtml}
+                            <span class="font-medium text-gray-800">${category.name}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Add "All Categories" option at the top
+            const allCategoriesHtml = `
+                <div class="category-menu-item bg-blue-500 rounded-lg p-3 cursor-pointer mb-3"
+                     data-category="all">
+                    <div class="flex items-center">
+                        <i class="fas fa-layer-group w-5 h-5 mr-3 text-white"></i>
+                        <span class="font-medium text-white">All Categories</span>
+                    </div>
+                </div>
+                ${categoriesHtml}
+            `;
+
+            categoriesContainer.innerHTML = allCategoriesHtml;
+
+        } else {
+            categoriesContainer.innerHTML = '<div class="text-center py-8"><p class="text-gray-500">No categories available</p></div>';
+        }
+
+    } catch (error) {
+        console.error('Error loading categories:', error);
+        categoriesContainer.innerHTML = '<div class="text-center py-8"><div class="text-red-500"><i class="fas fa-exclamation-triangle text-2xl mb-2"></i><p>Unable to load categories</p></div></div>';
     }
 }

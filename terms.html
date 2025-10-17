@@ -23,6 +23,24 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1257872372806455');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1257872372806455&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+    
     <!-- Tailwind Config -->
     <script>
         tailwind.config = {
@@ -65,9 +83,9 @@
                     <a href="contact" class="text-gray-700 hover:text-blue-600 transition-colors font-semibold px-4 py-2 rounded-lg hover:bg-blue-50">
                         <i class="fas fa-phone mr-2"></i>Contact Us
                     </a>
-                    <button onclick="openModal()" class="btn-primary px-6 py-2 rounded-lg font-semibold text-white">
-                        <i class="fas fa-envelope mr-2"></i>Enquiry
-                    </button>
+                    <a id="navbar-whatsapp-desktop" href="#" target="_blank" class="bg-green-500 hover:bg-green-600 px-6 py-2 rounded-lg font-semibold text-white flex items-center">
+                        <i class="fab fa-whatsapp mr-2"></i>WhatsApp
+                    </a>
                 </div>
 
                 <!-- Mobile Buttons -->
@@ -78,9 +96,9 @@
                     <a href="contact" class="text-gray-700 hover:text-blue-600 transition-colors p-2 rounded-lg hover:bg-blue-50">
                         <i class="fas fa-phone text-lg"></i>
                     </a>
-                    <button onclick="openModal()" class="btn-primary px-4 py-2 rounded-lg font-semibold text-white">
-                        <i class="fas fa-envelope mr-2"></i>Enquiry
-                    </button>
+                    <a id="navbar-whatsapp-mobile" href="#" target="_blank" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg font-semibold text-white flex items-center">
+                        <i class="fab fa-whatsapp mr-2"></i>WhatsApp
+                    </a>
                 </div>
             </div>
         </div>
@@ -487,9 +505,29 @@
                         
                         // Pre-filled message for WhatsApp
                         const whatsappMessage = encodeURIComponent("I want a new ID");
+                        const whatsappUrl = `https://wa.me/${whatsappForLink}?text=${whatsappMessage}`;
                         
-                        document.getElementById('footer-whatsapp-link').href = `https://wa.me/${whatsappForLink}?text=${whatsappMessage}`;
-                        document.getElementById('floating-whatsapp').href = `https://wa.me/${whatsappForLink}?text=${whatsappMessage}`;
+                        document.getElementById('footer-whatsapp-link').href = whatsappUrl;
+                        document.getElementById('floating-whatsapp').href = whatsappUrl;
+                        
+                        // Update navbar WhatsApp buttons
+                        const navbarWhatsappDesktop = document.getElementById('navbar-whatsapp-desktop');
+                        const navbarWhatsappMobile = document.getElementById('navbar-whatsapp-mobile');
+                        if (navbarWhatsappDesktop) navbarWhatsappDesktop.href = whatsappUrl;
+                        if (navbarWhatsappMobile) navbarWhatsappMobile.href = whatsappUrl;
+                        
+                        // Add Meta Pixel tracking to all WhatsApp links
+                        const allWhatsAppLinks = document.querySelectorAll('a[href*="wa.me"]');
+                        allWhatsAppLinks.forEach(link => {
+                            link.addEventListener('click', function() {
+                                if (typeof fbq !== 'undefined') {
+                                    fbq('track', 'Contact', {
+                                        content_name: 'WhatsApp Click',
+                                        content_category: 'WhatsApp'
+                                    });
+                                }
+                            });
+                        });
                     }
                     
                     // Update social media links

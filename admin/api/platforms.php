@@ -20,12 +20,8 @@ try {
     // Add full URL for logos
     foreach ($platforms as &$platform) {
         if ($platform['logo']) {
-            // Get the current domain and remove /admin from path
-            $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
-            $host = $_SERVER['HTTP_HOST'];
-            $baseUrl = $protocol . '://' . $host . '/game';
-            
-            $platform['logo_url'] = $baseUrl . '/' . $platform['logo'];
+            // Use relative URL that works both locally and on deployment
+            $platform['logo_url'] = $platform['logo'];
         } else {
             $platform['logo_url'] = null;
         }
